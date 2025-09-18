@@ -1,21 +1,30 @@
-<<<<<<< HEAD
-# bexie_mart
+# BexieMart App
+BexieMart is an e-commerce app for the sale and purchase of items in a highly secure system. It is a mobile application that allows users to buy and sell products online in a highly secure and authenticated environment.
 
-A new Flutter project.
 
-## Getting Started
+# Project Setup
 
-This project is a starting point for a Flutter application.
+## Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK
+- Android Studio
+- Visual Studio Code
+- Git
+- Emulator
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# BexieMart
-BexieMart is an e-commerce app for the sale and purchase of items in a highly secure system.
->>>>>>> d85db9f7641ff576566c9c7828ce17d7054e027a
+1. Clone the repository
+2. Open the project in Visual Studio Code
+3. Run `flutter pub get` to install dependencies
+4. Run `flutter run` to run the app
+
+## Features
+- User Authentication
+* Sign Up: Users can signup with their emails, phone numbers, and social media accounts
+* Sign In: Users can sign in with their emails, phone numbers, and social media accounts
+* Forgot Password: Users can reset their passwords
+* Reset Password: Users can reset their passwords
+* Verify Email: Users have to verify their emails and phone numbers to complete their sign up process
+
+
