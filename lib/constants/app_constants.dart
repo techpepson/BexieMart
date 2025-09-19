@@ -14,11 +14,14 @@ class AppConstants {
   static const Color secondaryColor = Color(0xFFADD8E6);
   static const Color accentColor = Color(0xFFCD853F);
   static const Color textColor = Color(0xFF002E63);
+  static const Color backgroundColor = Color(0xFFFFFFFF);
+  static const Color errorColor = Color(0xFFB3261E);
 
   //icons
   static const IconData checkedCircleIcon = Icons.check_circle_outline_outlined;
   static const IconData forwardArrowIcon = Icons.arrow_forward_outlined;
   static const IconData backArrowIcon = Icons.arrow_back;
+  static const IconData errorIcon = Icons.error_outline;
 
   //font sizes
   static const double fontSizeSmall = 12.0;

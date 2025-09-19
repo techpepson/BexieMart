@@ -67,6 +67,7 @@ flutter:
     - assets/images/Placeholder_01.png
     - assets/images/Placeholder_01@2x.png
     - assets/images/appLogo.jpg
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
