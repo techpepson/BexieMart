@@ -1,8 +1,8 @@
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
-class ElevatedButtonWidget extends StatelessWidget {
-  const ElevatedButtonWidget({
+class CustomButtonWidget extends StatelessWidget {
+  const CustomButtonWidget({
     super.key,
     required this.buttonTitle,
     this.isLoading = false,

@@ -52,7 +52,7 @@ class ModalWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                ElevatedButtonWidget(
+                CustomButtonWidget(
                   buttonTitle: buttonTitle,
                   onPressed: buttonAction,
                 ),
