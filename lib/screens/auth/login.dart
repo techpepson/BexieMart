@@ -14,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool isFirstTime = true;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   //function to simulate login
   Future<void> simulateLogin() async {
@@ -106,11 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             SizedBox(height: 12),
                             CustomFormField(
+                              controller: _emailController,
                               labelText: "Email",
                               hintText: "Enter your email",
                               suffixIcon: AppConstants.emailIcon,
                               isPassword: false,
                               onSuffixIconPressed: () {},
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
                               keyboardType: TextInputType.emailAddress,
                             ),
                             SizedBox(height: 12),
@@ -120,12 +129,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 CustomFormField(
+                                  controller: _passwordController,
                                   labelText: "Password",
                                   hintText: "Enter your password",
                                   suffixIcon: AppConstants.passwordIcon,
                                   isPassword: true,
                                   onSuffixIconPressed: () {},
-                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    return value == null ||
+                                            value.isEmpty ||
+                                            value.length < 6
+                                        ? 'Enter a valid password'
+                                        : null;
+                                  },
+                                  keyboardType: TextInputType.visiblePassword,
                                 ),
                                 TextButton(
                                   onPressed: () {},
@@ -153,6 +170,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             buttonTitle: "Login",
                             isLoading: isLoading,
                             onPressed: () async {
+                              if (_emailController.text.isEmpty ||
+                                  _passwordController.text.isEmpty) {}
                               await simulateLogin();
                             },
                           ),

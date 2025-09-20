@@ -13,6 +13,7 @@ class CustomFormField extends StatefulWidget {
     this.controller,
     this.validator,
     this.onChanged,
+    this.formKey,
   });
 
   final String labelText;
@@ -24,6 +25,7 @@ class CustomFormField extends StatefulWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final Function(String?)? onChanged;
+  final GlobalKey<FormState>? formKey;
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -39,6 +41,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: widget.formKey,
       child: Column(
         children: [
           TextFormField(
