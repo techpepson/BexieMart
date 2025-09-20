@@ -1,6 +1,11 @@
 import "package:flutter/material.dart";
 
 final appTheme = ThemeData(
+  radioTheme: RadioThemeData(
+    fillColor: WidgetStatePropertyAll(Color(0xFF0000FF)),
+    overlayColor: WidgetStatePropertyAll(Color(0xFF0000FF)),
+    splashRadius: 20,
+  ),
   primaryColor: Color(0xFF0000FF),
   scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme(

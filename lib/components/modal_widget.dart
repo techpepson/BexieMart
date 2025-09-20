@@ -61,7 +61,7 @@ class ModalWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 320,
+          top: 300,
           child: Material(
             elevation: 6,
             shape: const CircleBorder(),

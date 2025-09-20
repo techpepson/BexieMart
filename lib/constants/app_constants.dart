@@ -16,12 +16,16 @@ class AppConstants {
   static const Color textColor = Color(0xFF002E63);
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFB3261E);
+  static const Color greyedColor = Color(0xFFB3B3B3);
 
   //icons
   static const IconData checkedCircleIcon = Icons.check_circle_outline_outlined;
   static const IconData forwardArrowIcon = Icons.arrow_forward_outlined;
   static const IconData backArrowIcon = Icons.arrow_back;
   static const IconData errorIcon = Icons.error_outline;
+  static const IconData emailIcon = Icons.email_outlined;
+  static const IconData passwordIcon = Icons.lock_outlined;
+  static const IconData personIcon = Icons.person_outline;
 
   //font sizes
   static const double fontSizeSmall = 12.0;

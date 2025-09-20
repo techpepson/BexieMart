@@ -1,7 +1,8 @@
 import 'package:bexie_mart/components/elevated_button_widget.dart';
 import 'package:bexie_mart/constants/app_constants.dart';
+import 'package:bexie_mart/screens/auth/login.dart';
 import 'package:flutter/material.dart';
-import "dart:developer" as dev;
+import 'package:go_router/go_router.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
@@ -74,7 +75,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         child: CustomButtonWidget(
                           buttonTitle: "Get Started",
                           isLoading: false,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push('/register');
+                          },
                         ),
                       ),
                       Padding(
@@ -84,7 +87,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
                           children: [
                             Text("I already have an account"),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.push('/login');
+                              },
                               child: Icon(
                                 AppConstants.forwardArrowIcon,
                                 color: AppConstants.primaryColor,
