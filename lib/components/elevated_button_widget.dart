@@ -17,7 +17,9 @@ class CustomButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), //do not nest scaffolds
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ), //do not nest scaffolds
         backgroundColor: AppConstants.primaryColor,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -32,7 +34,15 @@ class CustomButtonWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
               )
-              : Text(buttonTitle),
+              : Text(
+                buttonTitle,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppConstants.backgroundColor,
+                  fontSize: 16,
+                  fontFamily: AppConstants.fontFamilyNunito,
+                ),
+              ),
     );
   }
 }

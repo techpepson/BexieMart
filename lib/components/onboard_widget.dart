@@ -53,9 +53,13 @@ class _OnboardWidgetState extends State<OnboardWidget> {
               spacing: 10,
               children: [
                 Text(
+                  textAlign: TextAlign.center,
                   widget.title,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: AppConstants.fontWeightBold,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    letterSpacing: -0.28,
+                    fontFamily: AppConstants.fontFamilyRaleway,
                   ),
                 ),
                 SizedBox(
@@ -64,8 +68,9 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                     textAlign: TextAlign.center,
                     widget.description,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: AppConstants.fontWeightLight,
-                      fontSize: AppConstants.fontSizeMedium,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                      fontFamily: AppConstants.fontFamilyNunito,
                     ),
                   ),
                 ),

@@ -1,6 +1,5 @@
 import 'package:bexie_mart/components/elevated_button_widget.dart';
 import 'package:bexie_mart/constants/app_constants.dart';
-import 'package:bexie_mart/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +26,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
+                    flex: 2,
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -40,24 +40,29 @@ class _LaunchScreenState extends State<LaunchScreen> {
                             ),
                           ),
                           Text(
+                            textAlign: TextAlign.center,
                             "BexieMart",
                             style: Theme.of(
                               context,
                             ).textTheme.titleLarge?.copyWith(
                               fontWeight: AppConstants.fontWeightMedium,
-                              fontSize: 40,
+                              fontSize: 52,
+                              letterSpacing: -0.52,
                             ),
                           ),
                           SizedBox(height: 12),
                           SizedBox(
-                            width: 200,
+                            width: 249,
+                            height: 59,
                             child: Text(
                               textAlign: TextAlign.center,
                               "Shop Smart, Live Easy - Your Campus Marketplace",
                               style: Theme.of(
                                 context,
                               ).textTheme.bodyLarge?.copyWith(
-                                fontWeight: AppConstants.fontWeightMedium,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 19,
+                                fontFamily: AppConstants.fontFamilyNunito,
                               ),
                             ),
                           ),
@@ -68,10 +73,12 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
                   //button display
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 300,
-                        height: 50,
+                        width: 330,
+                        height: 54,
                         child: CustomButtonWidget(
                           buttonTitle: "Get Started",
                           isLoading: false,
@@ -81,11 +88,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 12),
+                        padding: EdgeInsets.only(top: 12, left: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("I already have an account"),
+                            Text(
+                              "I already have an account",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 16,
+                                fontFamily: AppConstants.fontFamilyNunito,
+                              ),
+                            ),
                             TextButton(
                               onPressed: () {
                                 context.push('/login');
@@ -98,6 +115,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 64),
                     ],
                   ),
                 ],

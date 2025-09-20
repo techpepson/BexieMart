@@ -103,6 +103,7 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
                           ],
                         ),
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
@@ -121,7 +122,7 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 60),
+                      SizedBox(height: 80),
                     ],
                   ),
                 ),

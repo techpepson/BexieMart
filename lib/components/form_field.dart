@@ -8,24 +8,28 @@ class CustomFormField extends StatefulWidget {
     required this.hintText,
     this.suffixIcon,
     this.isPassword = false,
+    this.isPasswordVisible = false,
     this.onSuffixIconPressed,
     this.keyboardType,
     this.controller,
     this.validator,
     this.onChanged,
     this.formKey,
+    this.maxLines = 1,
   });
 
   final String labelText;
   final String hintText;
   final IconData? suffixIcon;
   final bool isPassword;
+  final bool? isPasswordVisible;
   final Function()? onSuffixIconPressed;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final Function(String?)? onChanged;
   final GlobalKey<FormState>? formKey;
+  final int maxLines;
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -48,22 +52,32 @@ class _CustomFormFieldState extends State<CustomFormField> {
             validator: widget.validator,
             onChanged: widget.onChanged,
             controller: widget.controller,
-            obscureText: widget.isPassword,
+            obscureText: widget.isPassword && !widget.isPasswordVisible!,
             keyboardType: widget.keyboardType,
+            maxLines: widget.isPassword ? 1 : widget.maxLines,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(style: BorderStyle.none, width: 0),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
               labelText: widget.labelText,
+              labelStyle: TextStyle(
+                color: AppConstants.textColor.withAlpha(90),
+              ),
+              hintStyle: TextStyle(color: AppConstants.textColor.withAlpha(90)),
               hintText: widget.hintText,
-              fillColor: AppConstants.greyedColor.withAlpha(50),
+              fillColor: AppConstants.greyedColor.withAlpha(70),
               filled: true,
               suffixIcon: IconButton(
-                icon: Icon(widget.suffixIcon),
+                icon: Icon(
+                  widget.suffixIcon,
+                  color: AppConstants.textColor.withAlpha(190),
+                  fill: 0,
+                  weight: 1,
+                ),
                 onPressed: widget.onSuffixIconPressed,
               ),
-              suffixIconColor: AppConstants.primaryColor,
+              suffixIconColor: AppConstants.textColor.withAlpha(190),
             ),
           ),
         ],

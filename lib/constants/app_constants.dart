@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppConstants {
@@ -13,10 +11,10 @@ class AppConstants {
   static const Color primaryColor = Color(0xFF0000FF);
   static const Color secondaryColor = Color(0xFFADD8E6);
   static const Color accentColor = Color(0xFFCD853F);
-  static const Color textColor = Color(0xFF002E63);
+  static const Color textColor = Color(0xFF202020);
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFB3261E);
-  static const Color greyedColor = Color(0xFFB3B3B3);
+  static const Color greyedColor = Color.fromARGB(255, 219, 216, 216);
 
   //icons
   static const IconData checkedCircleIcon = Icons.check_circle_outline_outlined;
@@ -26,6 +24,8 @@ class AppConstants {
   static const IconData emailIcon = Icons.email_outlined;
   static const IconData passwordIcon = Icons.lock_outlined;
   static const IconData personIcon = Icons.person_outline;
+  static const IconData eyeOpen = Icons.visibility_outlined;
+  static const IconData eyeClose = Icons.visibility_off_outlined;
 
   //font sizes
   static const double fontSizeSmall = 12.0;
