@@ -9,13 +9,15 @@ class AppConstants {
 
   //app colors
   static const Color primaryColor = Color(0xFF0000FF);
+  static const Color gradientBlue = Color(0xFFF004BFE);
   static const Color secondaryColor = Color(0xFFADD8E6);
   static const Color accentColor = Color(0xFFCD853F);
   static const Color textColor = Color(0xFF202020);
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFB3261E);
   static const Color greyedColor = Color.fromARGB(255, 219, 216, 216);
-
+  static const Color fadedBlue = Color(0xFFE5EBFC);
+  static const Color fadedRed = Color(0xFFFFEBEB);
   //icons
   static const IconData checkedCircleIcon = Icons.check_circle_outline_outlined;
   static const IconData forwardArrowIcon = Icons.arrow_forward_outlined;

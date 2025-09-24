@@ -167,7 +167,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 keyboardType: TextInputType.visiblePassword,
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.push('/reset-password');
+                                },
                                 child: Text(
                                   "Forgot Password?",
                                   style: Theme.of(
