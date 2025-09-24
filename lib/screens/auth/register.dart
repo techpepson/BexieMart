@@ -505,8 +505,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ],
                         ),
 
-                      if (_radioGroupValue == 'vendor')
-                        Text('Vendor data goes here'),
+                      // if (_radioGroupValue == 'vendor')
+                      //   Text('Vendor data goes here'),
                       SizedBox(height: 20),
                       //register button
                       SizedBox(
