@@ -1,6 +1,7 @@
 import 'package:bexie_mart/components/elevated_button_widget.dart';
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardWidget extends StatefulWidget {
   const OnboardWidget({
@@ -21,6 +22,7 @@ class OnboardWidget extends StatefulWidget {
 }
 
 class _OnboardWidgetState extends State<OnboardWidget> {
+  String userType = 'customer';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,7 +81,11 @@ class _OnboardWidgetState extends State<OnboardWidget> {
                 //display button when the screen is the last
                 widget.isLastScreen == true
                     ? CustomButtonWidget(
-                      onPressed: () {},
+                      onPressed: () {
+                        userType == 'customer'
+                            ? context.go('/customer-home')
+                            : context.go('/vendor-home');
+                      },
                       buttonTitle: "Let's Start",
                     )
                     : const SizedBox(),

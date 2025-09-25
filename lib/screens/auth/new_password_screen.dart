@@ -89,7 +89,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: Container(
+                        child: SizedBox(
                           width: 106,
                           height: 106,
                           child: Image.asset(AppConstants.onboardLargeImage1),

@@ -15,6 +15,7 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
   final PageController _pageController = PageController();
   final int _totalPages = 2;
   int _currentPage = 0;
+  final userType = 'customer';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +67,9 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
                           )
                           : TextButton(
                             onPressed: () {
-                              context.go('/');
+                              userType == 'customer'
+                                  ? context.go('/customer-home')
+                                  : context.go('/vendor-home');
                             },
                             child: Text(
                               "Done",

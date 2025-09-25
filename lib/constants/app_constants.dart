@@ -9,7 +9,7 @@ class AppConstants {
 
   //app colors
   static const Color primaryColor = Color(0xFF0000FF);
-  static const Color gradientBlue = Color(0xFFF004BFE);
+  static const Color gradientBlue = Color(0xfff004bfe);
   static const Color secondaryColor = Color(0xFFADD8E6);
   static const Color accentColor = Color(0xFFCD853F);
   static const Color textColor = Color(0xFF202020);

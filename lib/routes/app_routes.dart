@@ -1,9 +1,15 @@
+import 'package:bexie_mart/routes/customer_route.dart';
 import 'package:bexie_mart/screens/auth/account_detail.dart';
 import 'package:bexie_mart/screens/auth/forgot_password_screen.dart';
 import 'package:bexie_mart/screens/auth/login.dart';
 import 'package:bexie_mart/screens/auth/new_password_screen.dart';
 import 'package:bexie_mart/screens/auth/password_verify_screen.dart';
 import 'package:bexie_mart/screens/auth/register.dart';
+import 'package:bexie_mart/screens/customer/customer_earn.dart';
+import 'package:bexie_mart/screens/customer/customer_food.dart';
+import 'package:bexie_mart/screens/customer/customer_home.dart';
+import 'package:bexie_mart/screens/customer/customer_shop.dart';
+import 'package:bexie_mart/screens/customer/customer_wallet.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +122,143 @@ final GoRouter appRouter = GoRouter(
         );
       },
     ),
+    StatefulShellRoute.indexedStack(
+      builder:
+          (context, state, navigationShell) =>
+              CustomerRoute(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          initialLocation: '/customer-home',
+          routes: [
+            GoRoute(
+              path: '/customer-home',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: CustomerHome(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: 'show-all',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: CustomerHome(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/customer-shop',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: CustomerShop(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/customer-food',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: CustomerFood(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/customer-earn',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: CustomerEarn(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/customer-wallet',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: CustomerWallet(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    ),
   ],
-  initialLocation: "/",
 );

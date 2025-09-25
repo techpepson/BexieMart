@@ -328,22 +328,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 data: Theme.of(context).copyWith(
                                   radioTheme: RadioThemeData(
                                     fillColor:
-                                        MaterialStateProperty.resolveWith<
-                                          Color?
-                                        >((states) {
-                                          if (states.contains(
-                                            MaterialState.selected,
-                                          )) {
-                                            return AppConstants.primaryColor;
-                                          }
-                                          if (states.contains(
-                                            MaterialState.disabled,
-                                          )) {
-                                            return Colors.grey;
-                                          }
-                                          return AppConstants.textColor
-                                              .withAlpha(120);
-                                        }),
+                                        WidgetStateProperty.resolveWith<Color?>(
+                                          (states) {
+                                            if (states.contains(
+                                              WidgetState.selected,
+                                            )) {
+                                              return AppConstants.primaryColor;
+                                            }
+                                            if (states.contains(
+                                              WidgetState.disabled,
+                                            )) {
+                                              return Colors.grey;
+                                            }
+                                            return AppConstants.textColor
+                                                .withAlpha(120);
+                                          },
+                                        ),
                                   ),
                                 ),
                                 child: Row(
