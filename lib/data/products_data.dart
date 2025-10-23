@@ -193,7 +193,7 @@ class ProductsData {
     },
     {
       'productId': 4,
-      'productName': 'Shoe',
+      'productName': 'Bag',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],

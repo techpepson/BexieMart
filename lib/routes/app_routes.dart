@@ -5,11 +5,13 @@ import 'package:bexie_mart/screens/auth/login.dart';
 import 'package:bexie_mart/screens/auth/new_password_screen.dart';
 import 'package:bexie_mart/screens/auth/password_verify_screen.dart';
 import 'package:bexie_mart/screens/auth/register.dart';
+import 'package:bexie_mart/screens/customer/cart_screen.dart';
 import 'package:bexie_mart/screens/customer/customer_earn.dart';
 import 'package:bexie_mart/screens/customer/customer_food.dart';
 import 'package:bexie_mart/screens/customer/customer_home.dart';
 import 'package:bexie_mart/screens/customer/customer_shop.dart';
 import 'package:bexie_mart/screens/customer/customer_wallet.dart';
+import 'package:bexie_mart/screens/customer/favorites_screen.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:flutter/material.dart';
@@ -155,6 +157,42 @@ final GoRouter appRouter = GoRouter(
                       transitionDuration: Duration(milliseconds: 300),
                       key: state.pageKey,
                       child: CustomerHome(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'cart',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: CartScreen(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'favorites',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: FavoritesScreen(),
                       transitionsBuilder: (
                         context,
                         animation,

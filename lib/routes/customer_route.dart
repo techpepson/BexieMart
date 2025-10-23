@@ -28,9 +28,15 @@ class _CustomerRouteState extends State<CustomerRoute> {
         ),
         centerTitle: true,
         actions: [
-          Icon(Icons.favorite_border, weight: 350.0),
+          IconButton(
+            onPressed: () => context.push('/customer-home/favorites'),
+            icon: Icon(Icons.favorite_border, weight: 350.0),
+          ),
           SizedBox(width: 16),
-          Icon(Icons.shopping_cart_outlined, weight: 350.0),
+          IconButton(
+            icon: Icon(Icons.shopping_cart_outlined, weight: 350.0),
+            onPressed: () => context.push('/customer-home/cart'),
+          ),
           SizedBox(width: 16),
         ],
       ),
