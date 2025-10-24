@@ -48,13 +48,22 @@ class AppServices {
   //get most popular items
   List getMostPopularItems(List<Map<String, dynamic>> products) {
     return products.where((product) {
-        return product['productLikes'] != null &&
-            product['productLikes'] >= 10;
+        return product['productLikes'] != null && product['productLikes'] >= 10;
       }).toList()
       ..sort((Map<String, dynamic> a, Map<String, dynamic> b) {
         final likesA = a['productLikes'] ?? 0;
         final likesB = b['productLikes'] ?? 0;
         return likesB.compareTo(likesA);
       });
+  }
+
+  //delete items from a list
+  List<Map<String, dynamic>> deleteItemFromList(
+    List<Map<String, dynamic>> products,
+    int productId,
+  ) {
+    return products.where((product) {
+      return product['productId'] != productId;
+    }).toList();
   }
 }

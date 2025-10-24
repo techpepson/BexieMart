@@ -12,6 +12,7 @@ class AppConstants {
   static const Color gradientBlue = Color(0xfff004bfe);
   static const Color secondaryColor = Color(0xFFADD8E6);
   static const Color accentColor = Color(0xFFCD853F);
+  static const Color successColor = Color.fromARGB(255, 8, 168, 29);
   static const Color textColor = Color(0xFF202020);
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFB3261E);

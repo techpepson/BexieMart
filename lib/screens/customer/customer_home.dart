@@ -1,4 +1,5 @@
 import 'package:bexie_mart/components/elevated_button_widget.dart';
+import 'package:bexie_mart/components/empty_widget.dart';
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:bexie_mart/data/products_data.dart';
 import 'package:bexie_mart/services/app_services.dart';
@@ -263,136 +264,153 @@ class _CustomerHomeState extends State<CustomerHome> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 255,
-                                    child: ListView.builder(
-                                      itemCount: entries.length,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final entry = entries[index];
-                                        final String categoryKey =
-                                            entry.key as String;
-                                        final List<Map<String, dynamic>>
-                                        productsInCategory =
-                                            (entry.value as List)
-                                                .cast<Map<String, dynamic>>();
+                                  entries.isEmpty
+                                      ? EmptyWidget()
+                                      : SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 255,
+                                        child: ListView.builder(
+                                          itemCount: entries.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            final entry = entries[index];
+                                            final String categoryKey =
+                                                entry.key as String;
+                                            final List<Map<String, dynamic>>
+                                            productsInCategory =
+                                                (entry.value as List)
+                                                    .cast<
+                                                      Map<String, dynamic>
+                                                    >();
 
-                                        // First images from the first 4 products in this category
-                                        final List<String> thumbs =
-                                            productsInCategory
-                                                .take(4)
-                                                .map(
-                                                  (p) =>
-                                                      (p['productImage']
-                                                                  as List)
-                                                              .first
-                                                          as String,
-                                                )
-                                                .toList();
+                                            // First images from the first 4 products in this category
+                                            final List<String> thumbs =
+                                                productsInCategory
+                                                    .take(4)
+                                                    .map(
+                                                      (p) =>
+                                                          (p['productImage']
+                                                                      as List)
+                                                                  .first
+                                                              as String,
+                                                    )
+                                                    .toList();
 
-                                        return Card(
-                                          elevation: 0.5,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              12,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                // 2x2 thumbnail grid (up to 4)
-                                                SizedBox(
-                                                  width: 199.56,
-                                                  height: 200,
-                                                  child: GridView.builder(
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    gridDelegate:
-                                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 2,
-                                                          mainAxisSpacing: 6,
-                                                          crossAxisSpacing: 6,
-                                                        ),
-                                                    itemCount: thumbs.length,
-                                                    itemBuilder: (context, i) {
-                                                      final url = thumbs[i];
-                                                      return ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              8,
-                                                            ),
-                                                        child: CachedNetworkImage(
-                                                          width: 90.71,
-                                                          height: 75,
-                                                          imageUrl: url,
-                                                          fit: BoxFit.cover,
-
-                                                          errorWidget:
-                                                              (
-                                                                c,
-                                                                u,
-                                                                e,
-                                                              ) => const Icon(
-                                                                Icons
-                                                                    .broken_image,
-                                                              ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
+                                            return Card(
+                                              elevation: 0.5,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  8.0,
                                                 ),
-                                                // Bottom: Category name + count
-                                                const SizedBox(height: 8),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      categoryKey.replaceAll(
-                                                        '_',
-                                                        ' ',
-                                                      ), // from ENUM_NAME to readable
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                    // 2x2 thumbnail grid (up to 4)
+                                                    SizedBox(
+                                                      width: 199.56,
+                                                      height: 200,
+                                                      child: GridView.builder(
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        gridDelegate:
+                                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                              crossAxisCount: 2,
+                                                              mainAxisSpacing:
+                                                                  6,
+                                                              crossAxisSpacing:
+                                                                  6,
+                                                            ),
+                                                        itemCount:
+                                                            thumbs.length,
+                                                        itemBuilder: (
+                                                          context,
+                                                          i,
+                                                        ) {
+                                                          final url = thumbs[i];
+                                                          return ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  8,
+                                                                ),
+                                                            child: CachedNetworkImage(
+                                                              width: 90.71,
+                                                              height: 75,
+                                                              imageUrl: url,
+                                                              fit: BoxFit.cover,
+
+                                                              errorWidget:
+                                                                  (
+                                                                    c,
+                                                                    u,
+                                                                    e,
+                                                                  ) => const Icon(
+                                                                    Icons
+                                                                        .broken_image,
+                                                                  ),
+                                                            ),
+                                                          );
+                                                        },
                                                       ),
                                                     ),
-                                                    SizedBox(width: 30),
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 2,
+                                                    // Bottom: Category name + count
+                                                    const SizedBox(height: 8),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          categoryKey.replaceAll(
+                                                            '_',
+                                                            ' ',
+                                                          ), // from ENUM_NAME to readable
+                                                          overflow:
+                                                              TextOverflow
+                                                                  .ellipsis,
+                                                          style:
+                                                              const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                        ),
+                                                        SizedBox(width: 30),
+                                                        Container(
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
+                                                                horizontal: 8,
+                                                                vertical: 2,
+                                                              ),
+                                                          decoration: BoxDecoration(
+                                                            color:
+                                                                Colors.black12,
+                                                            shape:
+                                                                BoxShape
+                                                                    .rectangle,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  20,
+                                                                ),
                                                           ),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black12,
-                                                        shape:
-                                                            BoxShape.rectangle,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              20,
-                                                            ),
-                                                      ),
-                                                      child: Text(
-                                                        '${productsInCategory.length}',
-                                                      ),
+                                                          child: Text(
+                                                            '${productsInCategory.length}',
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
                                 ],
                               ),
                             ),
@@ -436,60 +454,66 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SizedBox(
-                                height: 100,
-                                child: ListView.builder(
-                                  itemCount: topProductsList.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    final product = topProductsList[index];
-                                    return Container(
-                                      width: 100,
-                                      height: 100,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            blurRadius: 10,
-                                            offset: const Offset(0, 5),
-                                          ),
-                                        ],
-                                        border: Border.all(
-                                          color: AppConstants.backgroundColor,
-                                          width: 8,
-                                        ),
-                                        color: AppConstants.backgroundColor,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(
-                                          100,
-                                        ),
-                                      ),
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          100,
-                                        ),
-                                        child: CachedNetworkImage(
-                                          width: 70,
-                                          height: 70,
-                                          imageUrl:
-                                              product['productImage'].first ??
-                                              '',
-
-                                          fit: BoxFit.fill,
-                                          errorWidget:
-                                              (c, u, e) => const Icon(
-                                                Icons.broken_image,
+                            topProductsList.isEmpty
+                                ? EmptyWidget()
+                                : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SizedBox(
+                                    height: 100,
+                                    child: ListView.builder(
+                                      itemCount: topProductsList.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final product = topProductsList[index];
+                                        return Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.white,
+                                                blurRadius: 10,
+                                                offset: const Offset(0, 5),
                                               ),
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                            ],
+                                            border: Border.all(
+                                              color:
+                                                  AppConstants.backgroundColor,
+                                              width: 8,
+                                            ),
+                                            color: AppConstants.backgroundColor,
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadius.circular(
+                                              100,
+                                            ),
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                            right: 12,
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              100,
+                                            ),
+                                            child: CachedNetworkImage(
+                                              width: 70,
+                                              height: 70,
+                                              imageUrl:
+                                                  product['productImage']
+                                                      .first ??
+                                                  '',
+
+                                              fit: BoxFit.fill,
+                                              errorWidget:
+                                                  (c, u, e) => const Icon(
+                                                    Icons.broken_image,
+                                                  ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                           ],
                         ),
 
@@ -532,105 +556,121 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SizedBox(
-                                height: 230,
-                                child: ListView.builder(
-                                  itemCount: productsLessThanSevenDays.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    final product =
-                                        productsLessThanSevenDays[index];
-                                    return Container(
-                                      width: 140,
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                        // border: Border.all(
-                                        //   color: AppConstants.backgroundColor,
-                                        //   width: 8,
-                                        // ),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(20),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            blurRadius: 10,
-                                            offset: const Offset(0, 5),
-                                          ),
-                                        ],
-                                      ),
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
+                            productsLessThanSevenDays.isEmpty
+                                ? EmptyWidget()
+                                : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SizedBox(
+                                    height: 230,
+                                    child: ListView.builder(
+                                      itemCount:
+                                          productsLessThanSevenDays.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final product =
+                                            productsLessThanSevenDays[index];
+                                        return Container(
+                                          width: 140,
+                                          height: 160,
+                                          decoration: BoxDecoration(
+                                            // border: Border.all(
+                                            //   color: AppConstants.backgroundColor,
+                                            //   width: 8,
+                                            // ),
+                                            shape: BoxShape.rectangle,
                                             borderRadius: BorderRadius.circular(
                                               20,
                                             ),
-                                            child: CachedNetworkImage(
-                                              width: 140,
-                                              height: 140,
-                                              imageUrl:
-                                                  product['productImage']
-                                                      .first ??
-                                                  '',
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.white,
+                                                blurRadius: 10,
+                                                offset: const Offset(0, 5),
+                                              ),
+                                            ],
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                            right: 12,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: CachedNetworkImage(
+                                                  width: 140,
+                                                  height: 140,
+                                                  imageUrl:
+                                                      product['productImage']
+                                                          .first ??
+                                                      '',
 
-                                              fit: BoxFit.cover,
-                                              errorWidget:
-                                                  (c, u, e) => const Icon(
-                                                    Icons.broken_image,
-                                                  ),
-                                            ),
+                                                  fit: BoxFit.cover,
+                                                  errorWidget:
+                                                      (c, u, e) => const Icon(
+                                                        Icons.broken_image,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                product['productName']
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 24,
+                                                    ),
+                                              ),
+                                              Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                product['productDescription']
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                              ),
+                                              Text(
+                                                '${ownerCurrency == 'dollars' ? '\$' : 'GHS'}${product['productPrice'].toString()}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 18,
+                                                    ),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                            product['productName'].toString(),
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 24,
-                                            ),
-                                          ),
-                                          Text(
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                            product['productDescription']
-                                                .toString(),
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${ownerCurrency == 'dollars' ? '\$' : 'GHS'}${product['productPrice'].toString()}',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                           ],
                         ),
 
@@ -656,73 +696,82 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SizedBox(
-                                height: 250,
-                                child: GridView.builder(
-                                  itemCount: discountedProducts.length,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        crossAxisSpacing: 0.0,
-                                        mainAxisSpacing: 19.0,
-                                        childAspectRatio: 1.0,
-                                      ),
-                                  itemBuilder: (context, index) {
-                                    final product = discountedProducts[index];
-                                    return Container(
-                                      width: 109,
-                                      height: 250,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          width: 3.0,
-                                          color: Colors.white,
-                                        ),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: Stack(
-                                        children: [
-                                          ClipRRect(
+                            discountedProducts.isEmpty
+                                ? EmptyWidget()
+                                : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SizedBox(
+                                    height: 250,
+                                    child: GridView.builder(
+                                      itemCount: discountedProducts.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3,
+                                            crossAxisSpacing: 0.0,
+                                            mainAxisSpacing: 19.0,
+                                            childAspectRatio: 1.0,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        final product =
+                                            discountedProducts[index];
+                                        return Container(
+                                          width: 109,
+                                          height: 250,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              width: 3.0,
+                                              color: Colors.white,
+                                            ),
+                                            shape: BoxShape.rectangle,
                                             borderRadius: BorderRadius.circular(
                                               20,
                                             ),
-                                            child: CachedNetworkImage(
-                                              width: 109,
-                                              height: 115,
-                                              imageUrl:
-                                                  product['productImage']
-                                                      .first ??
-                                                  '',
-
-                                              fit: BoxFit.cover,
-                                              errorWidget:
-                                                  (c, u, e) => const Icon(
-                                                    Icons.broken_image,
-                                                  ),
-                                            ),
                                           ),
-                                          Positioned(
-                                            top: 0,
-                                            right: 10,
-                                            child: Container(
-                                              width: 70,
-                                              height: 30,
-                                              padding: const EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
+                                          margin: const EdgeInsets.only(
+                                            right: 12,
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(20),
+                                                child: CachedNetworkImage(
+                                                  width: 109,
+                                                  height: 115,
+                                                  imageUrl:
+                                                      product['productImage']
+                                                          .first ??
+                                                      '',
+
+                                                  fit: BoxFit.cover,
+                                                  errorWidget:
+                                                      (c, u, e) => const Icon(
+                                                        Icons.broken_image,
+                                                      ),
+                                                ),
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  '-${product['productDiscount']}%',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleMedium
-                                                      ?.copyWith(
+                                              Positioned(
+                                                top: 0,
+                                                right: 10,
+                                                child: Container(
+                                                  width: 70,
+                                                  height: 30,
+                                                  padding: const EdgeInsets.all(
+                                                    8,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      '-${product['productDiscount']}%',
+                                                      style: Theme.of(
+                                                        context,
+                                                      ).textTheme.titleMedium?.copyWith(
                                                         fontFamily:
                                                             AppConstants
                                                                 .fontFamilyNunito,
@@ -733,17 +782,17 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                             AppConstants
                                                                 .backgroundColor,
                                                       ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                           ],
                         ),
 
@@ -784,99 +833,114 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SizedBox(
-                                height: 150,
-                                child: ListView.builder(
-                                  itemCount: mostPopularProducts.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    final product = mostPopularProducts[index];
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
+                            mostPopularProducts.isEmpty
+                                ? EmptyWidget()
+                                : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SizedBox(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      itemCount: mostPopularProducts.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final product =
+                                            mostPopularProducts[index];
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
                                             borderRadius: BorderRadius.circular(
                                               20,
                                             ),
-                                            child: CachedNetworkImage(
-                                              width: 115,
-                                              height: 115,
-                                              imageUrl:
-                                                  product['productImage']
-                                                      .first ??
-                                                  '',
-
-                                              fit: BoxFit.cover,
-                                              errorWidget:
-                                                  (c, u, e) => const Icon(
-                                                    Icons.broken_image,
-                                                  ),
-                                            ),
                                           ),
-                                          Row(
+                                          margin: const EdgeInsets.only(
+                                            right: 12,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                product['productLikes']
-                                                    .toString(),
-                                                style: Theme.of(
-                                                  context,
-                                                ).textTheme.bodyMedium?.copyWith(
-                                                  fontFamily:
-                                                      AppConstants
-                                                          .fontFamilyRaleway,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 20,
-                                                  color: AppConstants.textColor,
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: CachedNetworkImage(
+                                                  width: 115,
+                                                  height: 115,
+                                                  imageUrl:
+                                                      product['productImage']
+                                                          .first ??
+                                                      '',
+
+                                                  fit: BoxFit.cover,
+                                                  errorWidget:
+                                                      (c, u, e) => const Icon(
+                                                        Icons.broken_image,
+                                                      ),
                                                 ),
                                               ),
-                                              Icon(
-                                                Icons.favorite,
-                                                color:
-                                                    AppConstants.primaryColor,
-                                              ),
-                                              SizedBox(width: 30),
-                                              Text(
-                                                productsLessThanSevenDays
-                                                        .contains(product)
-                                                    ? "New"
-                                                    : discountedProducts
-                                                        .contains(product)
-                                                    ? "Flash"
-                                                    : mostPopularProducts
-                                                        .contains(product)
-                                                    ? "Hot"
-                                                    : "Regular",
-                                                style: Theme.of(
-                                                  context,
-                                                ).textTheme.bodyMedium?.copyWith(
-                                                  fontFamily:
-                                                      AppConstants
-                                                          .fontFamilyRaleway,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 18,
-                                                  color: AppConstants.textColor,
-                                                ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    product['productLikes']
+                                                        .toString(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              AppConstants
+                                                                  .fontFamilyRaleway,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 20,
+                                                          color:
+                                                              AppConstants
+                                                                  .textColor,
+                                                        ),
+                                                  ),
+                                                  Icon(
+                                                    Icons.favorite,
+                                                    color:
+                                                        AppConstants
+                                                            .primaryColor,
+                                                  ),
+                                                  SizedBox(width: 30),
+                                                  Text(
+                                                    productsLessThanSevenDays
+                                                            .contains(product)
+                                                        ? "New"
+                                                        : discountedProducts
+                                                            .contains(product)
+                                                        ? "Flash"
+                                                        : mostPopularProducts
+                                                            .contains(product)
+                                                        ? "Hot"
+                                                        : "Regular",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              AppConstants
+                                                                  .fontFamilyRaleway,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 18,
+                                                          color:
+                                                              AppConstants
+                                                                  .textColor,
+                                                        ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                           ],
                         ),
 
@@ -906,95 +970,110 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SizedBox(
-                                height: 240,
-                                child: GridView.builder(
-                                  itemCount: userFavorite.length,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 0.0,
-                                        mainAxisSpacing: 0.0,
-                                        childAspectRatio: 1.0,
-                                      ),
-                                  itemBuilder: (context, index) {
-                                    final product = userFavorite[index];
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
+                            userFavorite.isEmpty
+                                ? EmptyWidget()
+                                : Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SizedBox(
+                                    height: 240,
+                                    child: GridView.builder(
+                                      itemCount: userFavorite.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 0.0,
+                                            mainAxisSpacing: 0.0,
+                                            childAspectRatio: 1.0,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        final product = userFavorite[index];
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
                                             borderRadius: BorderRadius.circular(
                                               20,
                                             ),
-                                            child: CachedNetworkImage(
-                                              width: 100,
-                                              height: 100,
-                                              imageUrl:
-                                                  product['productImage']
-                                                      .first ??
-                                                  '',
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                            right: 12,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: CachedNetworkImage(
+                                                  width: 100,
+                                                  height: 100,
+                                                  imageUrl:
+                                                      product['productImage']
+                                                          .first ??
+                                                      '',
 
-                                              fit: BoxFit.cover,
-                                              errorWidget:
-                                                  (c, u, e) => const Icon(
-                                                    Icons.broken_image,
-                                                  ),
-                                            ),
+                                                  fit: BoxFit.cover,
+                                                  errorWidget:
+                                                      (c, u, e) => const Icon(
+                                                        Icons.broken_image,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                product['productName']
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 24,
+                                                    ),
+                                              ),
+                                              Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                product['productDescription']
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                              ),
+                                              Text(
+                                                '${ownerCurrency == 'dollars' ? '\$' : 'GHS'}${product['productPrice'].toString()}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          AppConstants
+                                                              .fontFamilyNunito,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 18,
+                                                    ),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            product['productName'].toString(),
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 24,
-                                            ),
-                                          ),
-                                          Text(
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                            product['productDescription']
-                                                .toString(),
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${ownerCurrency == 'dollars' ? '\$' : 'GHS'}${product['productPrice'].toString()}',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                           ],
                         ),
                       ],

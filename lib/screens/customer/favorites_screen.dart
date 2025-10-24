@@ -10,6 +10,10 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Text('I am the favorites screen');
+    return Center(
+      child: ClipRRect(
+        child: Image.asset('assets/images/empty.jpg', width: 200, height: 200),
+      ),
+    );
   }
 }

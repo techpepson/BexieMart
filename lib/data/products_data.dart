@@ -26,9 +26,11 @@ class ProductsData {
   ];
 
   //user favorites
-  final List<Map<String, dynamic>> userFavorite = [
+  List<Map<String, dynamic>> userFavorite = [
     {
       'productId': 1,
+      'productColor': 'blue',
+      'productSize': 'large',
       'productName': 'Shoe',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
@@ -55,7 +57,9 @@ class ProductsData {
       ],
     },
     {
-      'productId': 1,
+      'productId': 2,
+      'productColor': 'red',
+      'productSize': 'medium',
       'productName': 'Shoe',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
@@ -82,7 +86,9 @@ class ProductsData {
       ],
     },
     {
-      'productId': 1,
+      'productId': 3,
+      'productColor': 'pink',
+      'productSize': 'extraLarge',
       'productName': 'Shoe',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
@@ -95,6 +101,96 @@ class ProductsData {
       'productDiscount': 20,
       'productLikes': 100,
       'productQuantity': 20,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+  ];
+
+  List<Map<String, dynamic>> cartItems = [
+    {
+      'productId': 1,
+      'productColor': 'red',
+      'productName': 'Shoe',
+      'productSize': 'large',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': 100.00,
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 20,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+    {
+      'productId': 2,
+      'productColor': 'amber',
+      'productName': 'Shoe',
+      'productSize': 'medium',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': 100.00,
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 10,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+    {
+      'productId': 3,
+      'productColor': 'green',
+      'productSize': 'small',
+      'productName': 'Bags',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': 100.00,
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 5,
       'deliveryAvailable': true,
       'deliveryType': 'fast',
       'deliveryDuration': '15-30 minutes',

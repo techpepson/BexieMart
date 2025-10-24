@@ -10,6 +10,11 @@ class EmptyWidget extends StatefulWidget {
 class _EmptyWidgetState extends State<EmptyWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Image.asset('assets/images/empty.jpg', width: 150, height: 150),
+      ),
+    );
   }
 }
