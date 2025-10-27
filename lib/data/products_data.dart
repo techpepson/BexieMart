@@ -116,9 +116,29 @@ class ProductsData {
     },
   ];
 
+  List<Map<String, dynamic>> deliveryOptions = [
+    {
+      'optionId': 1,
+      'deliveryType': 'standard',
+      'unitOfDelivery': 'days',
+      'daysToDelivery': 5,
+      'deliveryFee': 0.0,
+    },
+    {
+      'optionId': 2,
+      'deliveryType': 'express',
+      'unitOfDelivery': 'days',
+      'daysToDelivery': 1,
+      'deliveryFee': 12.0,
+    },
+  ];
   List<Map<String, dynamic>> cartItems = [
     {
       'productId': 1,
+      'deliveryAddress': 'Accra, Ghana',
+      'contactInfo': '+233551875432',
+      'hasDiscounts': true,
+      'dueAmount': 100.00,
       'productColor': 'red',
       'productName': 'Shoe',
       'productSize': 'large',
@@ -130,11 +150,18 @@ class ProductsData {
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
-      'productDiscount': 20,
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2026-10-15',
+        },
+      ],
       'productLikes': 100,
-      'productQuantity': 20,
+      'productQuantity': 1,
       'deliveryAvailable': true,
-      'deliveryType': 'fast',
+      'deliveryType': 'standard',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 300,
       'productRating': 2.5,
@@ -150,6 +177,15 @@ class ProductsData {
       'productId': 2,
       'productColor': 'amber',
       'productName': 'Shoe',
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '15% off your next order.',
+          'discountTitle': 'Gift From Customer Care',
+          'discountEndDate': '2025-10-27',
+        },
+      ],
+      'dueAmount': 100.00,
       'productSize': 'medium',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
@@ -161,9 +197,9 @@ class ProductsData {
       'productSeller': 'John Doe',
       'productDiscount': 20,
       'productLikes': 100,
-      'productQuantity': 10,
+      'productQuantity': 1,
       'deliveryAvailable': true,
-      'deliveryType': 'fast',
+      'deliveryType': 'express',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 300,
       'productRating': 2.5,
@@ -184,15 +220,25 @@ class ProductsData {
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
       'productPrice': 100.00,
+      'dueAmount': 100.00,
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2024-10-15',
+        },
+      ],
       'productDescription': 'This is a shoe',
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
+
       'productDiscount': 20,
       'productLikes': 100,
-      'productQuantity': 5,
+      'productQuantity': 1,
       'deliveryAvailable': true,
-      'deliveryType': 'fast',
+      'deliveryType': 'express',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 300,
       'productRating': 2.5,

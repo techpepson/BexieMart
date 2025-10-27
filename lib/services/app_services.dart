@@ -66,4 +66,14 @@ class AppServices {
       return product['productId'] != productId;
     }).toList();
   }
+
+  DateTime parseStringToDate(String stringDate) {
+    DateTime currentDate = DateTime.parse(stringDate);
+    return currentDate;
+  }
+
+  DateTime getDaysDuration(int days) {
+    DateTime currentDate = DateTime.now();
+    return currentDate.add(Duration(days: days));
+  }
 }

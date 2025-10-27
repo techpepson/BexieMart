@@ -6,6 +6,7 @@ import 'package:bexie_mart/data/products_data.dart';
 import 'package:bexie_mart/services/app_services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -253,6 +254,7 @@ class _CartScreenState extends State<CartScreen> {
 
                 int productQuantity = item['productQuantity'];
                 String productImage = item['productImage'][0] ?? "";
+                totalAmount += unitPrice * productQuantity;
                 double finalPrice = unitPrice * productQuantity;
                 String productColor = item['productColor'];
                 List splitColorText = productColor.split('');
@@ -492,6 +494,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget _buildCheckoutButton() {
+    final List<Map<String, dynamic>> cartItems = products.cartItems;
     return SizedBox(
       width: 375,
       height: 60,
@@ -509,7 +512,13 @@ class _CartScreenState extends State<CartScreen> {
           CustomButtonWidget(
             buttonTitle: 'Checkout',
             isLoading: false,
-            onPressed: () {},
+            isDisabled: cartItems.isEmpty,
+            onPressed: () {
+              context.push(
+                '/payment',
+                extra: {'items': cartItems, 'totalAmount': totalAmount},
+              );
+            },
           ),
         ],
       ),

@@ -7,11 +7,13 @@ class CustomButtonWidget extends StatelessWidget {
     required this.buttonTitle,
     this.isLoading = false,
     this.onPressed,
+    this.isDisabled = false,
   });
 
   final String buttonTitle;
   final bool isLoading;
   final Function()? onPressed;
+  final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CustomButtonWidget extends StatelessWidget {
         backgroundColor: AppConstants.primaryColor,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
-      onPressed: isLoading ? null : onPressed,
+      onPressed: isLoading || isDisabled ? null : onPressed,
       child:
           isLoading
               ? const SizedBox(

@@ -14,6 +14,7 @@ import 'package:bexie_mart/screens/customer/customer_wallet.dart';
 import 'package:bexie_mart/screens/customer/favorites_screen.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
+import 'package:bexie_mart/screens/payments/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +27,22 @@ final GoRouter appRouter = GoRouter(
           transitionDuration: Duration(milliseconds: 300),
           key: state.pageKey,
           child: LaunchScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: '/payment',
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        final items = args['items'];
+        final totalAmount = args['totalAmount'];
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          key: state.pageKey,
+          child: PaymentScreen(items: items, totalAmount: totalAmount),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
