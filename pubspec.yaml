@@ -43,6 +43,7 @@ dependencies:
   carousel_slider: ^5.1.1
   collection: ^1.19.1
   intl: ^0.20.2
+  dotted_dashed_line: ^0.0.3
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,8 @@ flutter:
     - assets/images/Placeholder_01@2x.png
     - assets/images/appLogo.jpg
     - assets/images/empty.jpg
+    - assets/images/debit.jpg
+    - assets/images/momo.jpg
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

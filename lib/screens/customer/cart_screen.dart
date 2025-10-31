@@ -62,16 +62,16 @@ class _CartScreenState extends State<CartScreen> {
                     _buildCartItemsDisplay(),
                     SizedBox(height: 12),
 
-                    Text(
-                      'From Your Wishlist',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppConstants.textColor,
-                        fontSize: 24,
-                        fontFamily: AppConstants.fontFamilyRaleway,
-                      ),
-                    ),
-                    _buildFavoriteItemsDisplay(),
+                    // Text(
+                    //   'From Your Wishlist',
+                    //   style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    //     fontWeight: FontWeight.w700,
+                    //     color: AppConstants.textColor,
+                    //     fontSize: 24,
+                    //     fontFamily: AppConstants.fontFamilyRaleway,
+                    //   ),
+                    // ),
+                    // _buildFavoriteItemsDisplay(),
                     SizedBox(height: 12),
                   ],
                 ),
@@ -235,10 +235,25 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget _buildCartItemsDisplay() {
     List<Map<String, dynamic>> cartItems = products.cartItems;
+
+    //  Calculate total once
+    double total = 0.0;
+    for (var item in cartItems) {
+      double unitPrice =
+          (item['productPrice'] is double)
+              ? item['productPrice']
+              : double.tryParse(item['productPrice'].toString()) ?? 0.0;
+      int productQuantity = item['productQuantity'] ?? 1;
+      total += unitPrice * productQuantity;
+    }
+
+    // Update your state variable (if you need it for checkout)
+    totalAmount = total;
+
     return cartItems.isEmpty
         ? EmptyWidget()
         : SizedBox(
-          height: 350,
+          height: 500,
           child: Padding(
             padding: EdgeInsetsGeometry.all(10),
             child: ListView.builder(
@@ -248,13 +263,13 @@ class _CartScreenState extends State<CartScreen> {
               itemBuilder: (context, index) {
                 final item = cartItems[index];
                 double unitPrice =
-                    item['productPrice'] is double
+                    (item['productPrice'] is double)
                         ? item['productPrice']
-                        : double.parse(item['productPrice']);
+                        : double.tryParse(item['productPrice'].toString()) ??
+                            0.0;
 
                 int productQuantity = item['productQuantity'];
                 String productImage = item['productImage'][0] ?? "";
-                totalAmount += unitPrice * productQuantity;
                 double finalPrice = unitPrice * productQuantity;
                 String productColor = item['productColor'];
                 List splitColorText = productColor.split('');
@@ -412,8 +427,8 @@ class _CartScreenState extends State<CartScreen> {
                                         productQuantity > 1
                                             ? setState(() {
                                               item['productQuantity']--;
-                                              totalAmount -=
-                                                  unitPrice * productQuantity;
+                                              // totalAmount -=
+                                              //     unitPrice * productQuantity;
                                             })
                                             : null;
                                       },
@@ -465,8 +480,6 @@ class _CartScreenState extends State<CartScreen> {
                                     onPressed: () {
                                       setState(() {
                                         item['productQuantity']++;
-                                        totalAmount +=
-                                            unitPrice * productQuantity;
                                       });
                                     },
                                     icon: Icon(

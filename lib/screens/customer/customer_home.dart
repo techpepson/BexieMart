@@ -163,15 +163,22 @@ class _CustomerHomeState extends State<CustomerHome> {
                                   carouselController: _controller,
                                   items:
                                       productsData.advertData.map((e) {
-                                        return CachedNetworkImage(
-                                          errorWidget: (context, url, error) {
-                                            return Icon(
-                                              Icons.error,
-                                              color: Colors.red,
-                                            );
-                                          },
-                                          imageUrl: e['advertImage'],
-                                          fit: BoxFit.cover,
+                                        return ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            5.0,
+                                          ),
+                                          child: CachedNetworkImage(
+                                            width: 400,
+                                            height: 50,
+                                            errorWidget: (context, url, error) {
+                                              return Icon(
+                                                Icons.error,
+                                                color: Colors.red,
+                                              );
+                                            },
+                                            imageUrl: e['advertImage'],
+                                            fit: BoxFit.cover,
+                                          ),
                                         );
                                       }).toList(),
                                   options: CarouselOptions(
