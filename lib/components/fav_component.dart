@@ -22,7 +22,7 @@ class _FavComponentState extends State<FavComponent> {
     return favoriteItems.isEmpty
         ? EmptyWidget()
         : SizedBox(
-          height: 300,
+          height: 700,
           child: Padding(
             padding: EdgeInsetsGeometry.all(10),
             child: ListView.builder(

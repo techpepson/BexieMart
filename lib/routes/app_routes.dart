@@ -12,6 +12,7 @@ import 'package:bexie_mart/screens/customer/customer_home.dart';
 import 'package:bexie_mart/screens/customer/customer_shop.dart';
 import 'package:bexie_mart/screens/customer/customer_wallet.dart';
 import 'package:bexie_mart/screens/customer/favorites_screen.dart';
+import 'package:bexie_mart/screens/customer/recently_viewed.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:bexie_mart/screens/payments/payment_screen.dart';
@@ -210,6 +211,24 @@ final GoRouter appRouter = GoRouter(
                       transitionDuration: Duration(milliseconds: 300),
                       key: state.pageKey,
                       child: FavoritesScreen(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'recently-viewed',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: RecentlyViewed(),
                       transitionsBuilder: (
                         context,
                         animation,

@@ -76,4 +76,27 @@ class AppServices {
     DateTime currentDate = DateTime.now();
     return currentDate.add(Duration(days: days));
   }
+
+  //get items over a period
+
+  List<Map<String, dynamic>> getItemsOverTime(
+    List<Map<String, dynamic>> items,
+    String selectedDate,
+  ) {
+    DateTime targetDate = parseStringToDate(selectedDate);
+
+    return items.where((item) {
+      DateTime? watchDate;
+
+      try {
+        watchDate = parseStringToDate(item['watchDate']);
+      } catch (_) {
+        return false;
+      }
+
+      return watchDate.year == targetDate.year &&
+          watchDate.month == targetDate.month &&
+          watchDate.day == targetDate.day;
+    }).toList();
+  }
 }

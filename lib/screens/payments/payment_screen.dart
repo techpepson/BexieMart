@@ -464,7 +464,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           height: 240,
           child: ListView.builder(
             itemCount: widget.items.length,
-            physics: PageScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             itemExtent: 70.0,
             itemBuilder: (context, index) {
               final int productQuantity = items[index]['productQuantity'] ?? 1;

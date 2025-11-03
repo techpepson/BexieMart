@@ -1215,4 +1215,97 @@ class ProductsData {
       ],
     },
   ];
+
+  List<Map<String, dynamic>> recentlyWatched = [
+    {
+      'productId': 1,
+      'productColor': 'blue',
+      'productSize': 'large',
+      'productName': 'Shoe',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': '100',
+      'watchDate': '2025-11-03',
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 20,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+    {
+      'productId': 2,
+      'productColor': 'red',
+      'productSize': 'medium',
+      'watchDate': '2025-11-03',
+      'productName': 'Shoe',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': '100',
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 20,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+    {
+      'productId': 3,
+      'productColor': 'pink',
+      'productSize': 'extraLarge',
+      'watchDate': '2025-11-03',
+      'productName': 'Shoe',
+      'productImage': [
+        'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
+      ],
+      'productPrice': '100',
+      'productDescription': 'This is a shoe',
+      'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
+      'uploadDate': '2025-09-25',
+      'productSeller': 'John Doe',
+      'productDiscount': 20,
+      'productLikes': 100,
+      'productQuantity': 20,
+      'deliveryAvailable': true,
+      'deliveryType': 'fast',
+      'deliveryDuration': '15-30 minutes',
+      'deliveryFare': 300,
+      'productRating': 2.5,
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+    },
+  ];
 }

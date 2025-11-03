@@ -1120,7 +1120,7 @@ class _CustomerHomeState extends State<CustomerHome> {
             child: SizedBox(
               height: 550,
               child: GridView.builder(
-                physics: PageScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 itemCount: searchResults.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

@@ -253,13 +253,13 @@ class _CartScreenState extends State<CartScreen> {
     return cartItems.isEmpty
         ? EmptyWidget()
         : SizedBox(
-          height: 500,
+          height: 700,
           child: Padding(
             padding: EdgeInsetsGeometry.all(10),
             child: ListView.builder(
               itemExtent: 120,
               itemCount: cartItems.length,
-              physics: PageScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final item = cartItems[index];
                 double unitPrice =
