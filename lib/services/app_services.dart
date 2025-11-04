@@ -1,4 +1,8 @@
+import 'package:bexie_mart/constants/app_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AppServices {
   Map<String, dynamic> getTopProducts(List<Map<String, dynamic>> products) {
@@ -98,5 +102,69 @@ class AppServices {
           watchDate.month == targetDate.month &&
           watchDate.day == targetDate.day;
     }).toList();
+  }
+
+  Future<void> copyLink(String itemToCopy, BuildContext context) async {
+    if (itemToCopy.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'No item copied.',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppConstants.backgroundColor,
+            ),
+          ),
+          backgroundColor: AppConstants.accentColor,
+        ),
+      );
+
+      return;
+    }
+
+    try {
+      await Clipboard.setData(ClipboardData(text: itemToCopy));
+      SnackBar(
+        content: Text(
+          '$itemToCopy copied to clipboard',
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppConstants.backgroundColor),
+        ),
+        backgroundColor: AppConstants.successColor,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to copy link: $e')));
+    }
+  }
+
+  Future<void> shareItem(
+    String shareText,
+    String shareTitle,
+    String subject,
+    BuildContext context,
+  ) async {
+    final params = ShareParams(
+      text: shareText,
+      title: shareTitle,
+      subject: subject,
+    );
+
+    try {
+      await SharePlus.instance.share(params);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Error occurred sharing item.',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppConstants.backgroundColor,
+            ),
+          ),
+          backgroundColor: AppConstants.errorColor,
+        ),
+      );
+    }
   }
 }

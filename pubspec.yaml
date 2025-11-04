@@ -44,6 +44,7 @@ dependencies:
   collection: ^1.19.1
   intl: ^0.20.2
   dotted_dashed_line: ^0.0.3
+  share_plus: ^12.0.1
 
 dev_dependencies:
   flutter_test:
