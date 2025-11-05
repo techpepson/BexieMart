@@ -758,38 +758,65 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 ),
                                               ),
                                               Positioned(
-                                                top: 0,
-                                                right: 10,
+                                                top: 8,
+                                                right: 8,
                                                 child: Container(
-                                                  width: 70,
-                                                  height: 30,
-                                                  padding: const EdgeInsets.all(
-                                                    8,
-                                                  ),
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 5,
+                                                      ),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.red,
+                                                    color:
+                                                        AppConstants.errorColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                          8,
+                                                          12,
                                                         ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      '-${product['productDiscount']}%',
-                                                      style: Theme.of(
-                                                        context,
-                                                      ).textTheme.titleMedium?.copyWith(
-                                                        fontFamily:
-                                                            AppConstants
-                                                                .fontFamilyNunito,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 16,
-                                                        color:
-                                                            AppConstants
-                                                                .backgroundColor,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black
+                                                            .withOpacity(0.2),
+                                                        blurRadius: 4,
+                                                        offset: const Offset(
+                                                          0,
+                                                          2,
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ],
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        '${product['productDiscount']}%',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              AppConstants
+                                                                  .fontFamilyRaleway,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.5,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 2),
+                                                      Text(
+                                                        'OFF',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              AppConstants
+                                                                  .fontFamilyRaleway,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 10,
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.5,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),

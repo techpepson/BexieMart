@@ -35,17 +35,56 @@ class _CustomerEarnState extends State<CustomerEarn> {
         isBecomingAffiliate = true;
       });
 
-      await Future.delayed(Duration(seconds: 5), () {
-        return ModalWidget(
-          title: 'Thank',
-          description: 'Your request to become an affiliate was successful.',
-          buttonTitle: "Ok",
-          buttonAction: () => context.pop(),
+      // Simulate network delay
+      await Future.delayed(const Duration(seconds: 3));
+
+      // Show confirmation modal
+      if (context.mounted) {
+        await showDialog(
+          context: context,
+          builder:
+              (context) => ModalWidget(
+                title: 'Thank You!',
+                description:
+                    'Your request to become an affiliate was successful.',
+                buttonTitle: "Ok",
+                buttonAction: () {
+                  Navigator.of(context).pop();
+                },
+              ),
         );
+      }
+
+      // Update state to reflect affiliate status
+      setState(() {
+        isAffiliate = true;
+        isBecomingAffiliate = false;
       });
     } catch (e) {
-      print(e);
+      setState(() {
+        isBecomingAffiliate = false;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Something went wrong. Please try again.'),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      isBecomingAffiliate = false;
+    });
+
+    setState(() {
+      isAffiliate = false;
+    });
   }
 
   @override
@@ -117,8 +156,9 @@ class _CustomerEarnState extends State<CustomerEarn> {
       height: 54,
       child: CustomButtonWidget(
         buttonTitle: 'Become an affiliate',
+        isLoading: isBecomingAffiliate,
         onPressed: () async {
-          await becomeAffiliate();
+          return await becomeAffiliate();
         },
         isDisabled: false,
       ),
