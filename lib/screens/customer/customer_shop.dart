@@ -35,52 +35,17 @@ class _CustomerShopState extends State<CustomerShop> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildSearchBar(),
-            SizedBox(height: 12),
             _buildItemsDisplay(),
+            
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 28.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: TextField(
-          controller: searchFieldController,
-          onChanged: (value) async {
-            final results = await handleSearchFieldChange();
-            // if (searchFieldController.text.isNotEmpty) {
-            //   setState(() {
-            //     searchResults = results;
-            //   });
-            // } else {
-            //   searchResults = [];
-            // }
-          },
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: AppConstants.greyedColor.withAlpha(100),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            prefixIcon: Icon(Icons.search),
-            hintText: "Search",
-            hintStyle: TextStyle(
-              color: const Color.fromARGB(255, 160, 157, 157),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildSearchBar() {
+  //   return
+  // }
 
   Widget _buildItemsDisplay() {
     List<Map<String, dynamic>> items = products.products;

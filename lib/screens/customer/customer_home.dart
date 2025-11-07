@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:developer' as dev;
 
+import 'package:go_router/go_router.dart';
+
 class CustomerHome extends StatefulWidget {
   const CustomerHome({super.key});
 
@@ -444,7 +446,16 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push(
+                                        '/all-products',
+                                        extra: {
+                                          'items': topProductsList,
+                                          'ownerCurrency': ownerCurrency,
+                                          'title': 'Top Products',
+                                        },
+                                      );
+                                    },
                                     child: Text(
                                       'See All',
                                       style: Theme.of(
@@ -546,7 +557,16 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push(
+                                        '/all-products',
+                                        extra: {
+                                          'items': productsLessThanSevenDays,
+                                          'ownerCurrency': ownerCurrency,
+                                          'title': 'New Items',
+                                        },
+                                      );
+                                    },
                                     child: Text(
                                       'See All',
                                       style: Theme.of(
@@ -851,7 +871,16 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push(
+                                        '/all-products',
+                                        extra: {
+                                          'items': mostPopularProducts,
+                                          'ownerCurrency': ownerCurrency,
+                                          'title': 'Most Popular',
+                                        },
+                                      );
+                                    },
                                     child: Text(
                                       'See All',
                                       style: Theme.of(

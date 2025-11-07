@@ -5,6 +5,7 @@ import 'package:bexie_mart/screens/auth/login.dart';
 import 'package:bexie_mart/screens/auth/new_password_screen.dart';
 import 'package:bexie_mart/screens/auth/password_verify_screen.dart';
 import 'package:bexie_mart/screens/auth/register.dart';
+import 'package:bexie_mart/screens/customer/all_products.dart';
 import 'package:bexie_mart/screens/customer/cart_screen.dart';
 import 'package:bexie_mart/screens/customer/customer_earn.dart';
 import 'package:bexie_mart/screens/customer/customer_food.dart';
@@ -44,6 +45,27 @@ final GoRouter appRouter = GoRouter(
           transitionDuration: Duration(milliseconds: 300),
           key: state.pageKey,
           child: PaymentScreen(items: items, totalAmount: totalAmount),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: '/all-products',
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        List<Map<String, dynamic>> items = args['items'];
+        String ownerCurrency = args['ownerCurrency'];
+        String title = args['title'];
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          key: state.pageKey,
+          child: AllProducts(
+            items: items,
+            ownerCurrency: ownerCurrency,
+            title: title,
+          ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

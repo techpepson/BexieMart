@@ -266,32 +266,35 @@ class _CustomerEarnState extends State<CustomerEarn> {
                     borderRadius: BorderRadius.circular(9),
                     color: AppConstants.primaryColor.withAlpha(20),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: AppConstants.textColor,
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                          ),
+                          '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $totalEarning',
                         ),
-                        '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $totalEarning',
-                      ),
-                      Text(
-                        'Total Earning',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        Text(
+                          'Total Earning',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(width: 24),
@@ -306,32 +309,35 @@ class _CustomerEarnState extends State<CustomerEarn> {
                     borderRadius: BorderRadius.circular(9),
                     color: AppConstants.primaryColor.withAlpha(20),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: AppConstants.textColor,
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                          ),
+                          '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $pendingCommission',
                         ),
-                        '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $pendingCommission',
-                      ),
-                      Text(
-                        'Pending Commission',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        Text(
+                          'Pending Commission',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -350,32 +356,35 @@ class _CustomerEarnState extends State<CustomerEarn> {
                     borderRadius: BorderRadius.circular(9),
                     color: AppConstants.primaryColor.withAlpha(20),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: AppConstants.textColor,
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                          ),
+                          '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $withdrawalBalance',
                         ),
-                        '${ownerCurrency == 'dollars' ? '\$' : "GHS"} $withdrawalBalance',
-                      ),
-                      Text(
-                        'Withdrawal Balance',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        Text(
+                          'Withdrawal Balance',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(width: 24),
@@ -390,32 +399,35 @@ class _CustomerEarnState extends State<CustomerEarn> {
                     borderRadius: BorderRadius.circular(9),
                     color: AppConstants.primaryColor.withAlpha(20),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: AppConstants.textColor,
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 24,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24,
+                          ),
+                          '$referralsMade',
                         ),
-                        '$referralsMade',
-                      ),
-                      Text(
-                        'Referrals Made',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontFamily: AppConstants.fontFamilyNunito,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        Text(
+                          'Referrals Made',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(
+                            fontFamily: AppConstants.fontFamilyNunito,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -588,12 +600,15 @@ class _CustomerEarnState extends State<CustomerEarn> {
             ),
           ],
         ),
-        Text(
-          description,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontFamily: AppConstants.fontFamilyNunito,
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
+        Padding(
+          padding: EdgeInsets.only(left: 26),
+          child: Text(
+            description,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontFamily: AppConstants.fontFamilyNunito,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
           ),
         ),
       ],
