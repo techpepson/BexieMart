@@ -508,23 +508,29 @@ class _CustomerHomeState extends State<CustomerHome> {
                                           margin: const EdgeInsets.only(
                                             right: 12,
                                           ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              100,
-                                            ),
-                                            child: CachedNetworkImage(
-                                              width: 70,
-                                              height: 70,
-                                              imageUrl:
-                                                  product['productImage']
-                                                      .first ??
-                                                  '',
+                                          child: InkWell(
+                                            onTap:
+                                                () => context.push(
+                                                  '/product-details',
+                                                  extra: {'item': product},
+                                                ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: CachedNetworkImage(
+                                                width: 70,
+                                                height: 70,
+                                                imageUrl:
+                                                    product['productImage']
+                                                        .first ??
+                                                    '',
 
-                                              fit: BoxFit.fill,
-                                              errorWidget:
-                                                  (c, u, e) => const Icon(
-                                                    Icons.broken_image,
-                                                  ),
+                                                fit: BoxFit.fill,
+                                                errorWidget:
+                                                    (c, u, e) => const Icon(
+                                                      Icons.broken_image,
+                                                    ),
+                                              ),
                                             ),
                                           ),
                                         );

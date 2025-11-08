@@ -257,6 +257,30 @@ class ProductsData {
   final List<Map<String, dynamic>> products = [
     {
       'productId': 1,
+      'productColor': 'Red',
+      'shop': {
+        'shopName': 'Jean Collections',
+        'shopOwnerImage':
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+        'shopDescription': 'I have a shop that sells best clothings.',
+      },
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'large',
       'productName': 'Shoe',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
@@ -267,24 +291,56 @@ class ProductsData {
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
       'productDiscount': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 100,
       'productQuantity': 20,
       'deliveryAvailable': true,
       'deliveryType': 'fast',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 300,
+      'productStock': 20,
       'productRating': 2.5,
       'productReviewers': [
         {
           'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
           'reviewerNotes':
               'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
     {
       'productId': 9,
       'productName': 'Shoe',
+      'productColor': 'Red',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'medium',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
@@ -294,6 +350,8 @@ class ProductsData {
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
       'productDiscount': 20,
+      'productStock': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 100,
       'productQuantity': 20,
       'deliveryAvailable': true,
@@ -304,8 +362,20 @@ class ProductsData {
       'productReviewers': [
         {
           'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
           'reviewerNotes':
               'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
@@ -317,10 +387,30 @@ class ProductsData {
       ],
       'productPrice': '100',
       'productDescription': 'This is a shoe',
+      'productColor': 'Red',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'small',
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
       'productDiscount': 20,
+      'productStock': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 100,
       'productQuantity': 20,
       'deliveryAvailable': true,
@@ -331,14 +421,44 @@ class ProductsData {
       'productReviewers': [
         {
           'reviewerName': 'Veronika',
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerRating': 4.5,
           'reviewerNotes':
               'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
     {
       'productId': 4,
       'productName': 'Bag',
+      'productColor': 'Red',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'extraLarge',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
@@ -347,7 +467,9 @@ class ProductsData {
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'John Doe',
+      'productStock': 20,
       'productDiscount': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 100,
       'productQuantity': 20,
       'deliveryAvailable': true,
@@ -358,8 +480,20 @@ class ProductsData {
       'productReviewers': [
         {
           'reviewerName': 'Veronika',
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerRating': 4.5,
           'reviewerNotes':
               'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
@@ -370,11 +504,31 @@ class ProductsData {
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
       'productPrice': '75',
+      'productColor': 'Red',
+      'productSize': 'medium',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
       'productDescription': 'Gentle face cream',
       'productCategory': ProductsCategories.BEAUTY_AND_PERSONAL_CARE.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Jane Doe',
       'productDiscount': 10,
+      'productStock': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 42,
       'productQuantity': 50,
       'deliveryAvailable': true,
@@ -384,8 +538,21 @@ class ProductsData {
       'productRating': 3.8,
       'productReviewers': [
         {
-          'reviewerName': 'Alex',
-          'reviewerNotes': 'Great texture and fast delivery.',
+          'reviewerName': 'Veronika',
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerRating': 4.5,
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
@@ -400,7 +567,27 @@ class ProductsData {
       'productCategory': ProductsCategories.BEAUTY_AND_PERSONAL_CARE.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Jane Doe',
+      'productColor': 'Red',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'medium',
+      'productStock': 20,
       'productDiscount': 10,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 42,
       'productQuantity': 50,
       'deliveryAvailable': true,
@@ -410,14 +597,29 @@ class ProductsData {
       'productRating': 4.2,
       'productReviewers': [
         {
-          'reviewerName': 'Alex',
-          'reviewerNotes': 'Great texture and fast delivery.',
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
     {
       'productId': 13,
       'productName': 'Face Cream',
+      'productColor': 'Red',
+      'productSize': 'medium',
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
@@ -425,8 +627,26 @@ class ProductsData {
       'productDescription': 'Gentle face cream',
       'productCategory': ProductsCategories.BEAUTY_AND_PERSONAL_CARE.name,
       'uploadDate': '2025-09-25',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
       'productSeller': 'Jane Doe',
+      'productStock': 20,
       'productDiscount': 10,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 42,
       'productQuantity': 50,
       'deliveryAvailable': true,
@@ -436,8 +656,21 @@ class ProductsData {
       'productRating': 4.5,
       'productReviewers': [
         {
-          'reviewerName': 'Alex',
-          'reviewerNotes': 'Great texture and fast delivery.',
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
@@ -449,10 +682,30 @@ class ProductsData {
       ],
       'productPrice': '75',
       'productDescription': 'Gentle face cream',
+      'productColor': 'Red',
+      'productSize': 'medium',
       'productCategory': ProductsCategories.BEAUTY_AND_PERSONAL_CARE.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Jane Doe',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
       'productDiscount': 10,
+      'productStock': 20,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 42,
       'productQuantity': 50,
       'deliveryAvailable': true,
@@ -462,8 +715,21 @@ class ProductsData {
       'productRating': 4.8,
       'productReviewers': [
         {
-          'reviewerName': 'Alex',
-          'reviewerNotes': 'Great texture and fast delivery.',
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
         },
       ],
     },
@@ -478,15 +744,53 @@ class ProductsData {
       'productCategory': ProductsCategories.ELECTRONICS_AND_GADGETS.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Tech Hub',
+      'productColor': 'Red',
+      'productSize': 'medium',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
       'productDiscount': 15,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 320,
+      'productStock': 20,
       'productQuantity': 35,
       'deliveryAvailable': true,
       'deliveryType': 'fast',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 500,
       'productRating': 4.2,
-      'productReviewers': [],
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
+        },
+      ],
     },
     {
       'productId': 14,
@@ -499,15 +803,53 @@ class ProductsData {
       'productCategory': ProductsCategories.ELECTRONICS_AND_GADGETS.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Tech Hub',
+      'productColor': 'Red',
+      'productSize': 'medium',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
       'productDiscount': 15,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 320,
       'productQuantity': 35,
       'deliveryAvailable': true,
       'deliveryType': 'fast',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 500,
+      'productStock': 20,
       'productRating': 4.5,
-      'productReviewers': [],
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
+        },
+      ],
     },
     {
       'productId': 15,
@@ -520,15 +862,53 @@ class ProductsData {
       'productCategory': ProductsCategories.ELECTRONICS_AND_GADGETS.name,
       'uploadDate': '2025-09-25',
       'productSeller': 'Tech Hub',
+      'productColor': 'Red',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productSize': 'medium',
       'productDiscount': 15,
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 320,
       'productQuantity': 35,
+      'productStock': 20,
       'deliveryAvailable': true,
       'deliveryType': 'fast',
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 500,
       'productRating': 4,
-      'productReviewers': [],
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
+        },
+      ],
     },
     {
       'productId': 6,
@@ -542,6 +922,26 @@ class ProductsData {
       'uploadDate': '2025-09-25',
       'productSeller': 'Tech Hub',
       'productDiscount': 15,
+      'productStock': 20,
+      'productColor': 'Red',
+      'productSize': 'medium',
+      'deliveryOptions': [
+        {
+          'optionId': 1,
+          'deliveryType': 'standard',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 5,
+          'deliveryFee': 0.0,
+        },
+        {
+          'optionId': 2,
+          'deliveryType': 'express',
+          'unitOfDelivery': 'days',
+          'daysToDelivery': 1,
+          'deliveryFee': 12.0,
+        },
+      ],
+      'productDiscountEndDate': '2025-11-08',
       'productLikes': 320,
       'productQuantity': 35,
       'deliveryAvailable': true,
@@ -549,7 +949,25 @@ class ProductsData {
       'deliveryDuration': '15-30 minutes',
       'deliveryFare': 500,
       'productRating': 4,
-      'productReviewers': [],
+      'productReviewers': [
+        {
+          'reviewerName': 'Veronika',
+          'reviewerRating': 4.5,
+          'reviewerProfileImage':
+              'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+          'reviewerNotes':
+              'I loved this product from the first time I got into contact with it.The seller is so friendly and calm ',
+        },
+      ],
+      'discounts': [
+        {
+          'discountRate': 5,
+          'discountDescription': '5% discount on your next order.',
+          'discountTitle': 'First Purchase',
+          'discountEndDate': '2025-10-15',
+          'discountType': 'percentage',
+        },
+      ],
     },
   ];
 

@@ -1,3 +1,4 @@
+import 'package:bexie_mart/components/product_details_component.dart';
 import 'package:bexie_mart/routes/customer_route.dart';
 import 'package:bexie_mart/screens/auth/account_detail.dart';
 import 'package:bexie_mart/screens/auth/forgot_password_screen.dart';
@@ -66,6 +67,22 @@ final GoRouter appRouter = GoRouter(
             ownerCurrency: ownerCurrency,
             title: title,
           ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/product-details',
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        Map<String, dynamic> item = args['item'];
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          key: state.pageKey,
+          child: ProductDetailsComponent(item: item),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
