@@ -1,4 +1,3 @@
-import 'package:bexie_mart/components/elevated_button_widget.dart';
 import 'package:bexie_mart/components/empty_widget.dart';
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:bexie_mart/data/products_data.dart';
@@ -170,8 +169,19 @@ class _CustomerHomeState extends State<CustomerHome> {
                                             5.0,
                                           ),
                                           child: CachedNetworkImage(
+                                            placeholder:
+                                                (context, url) => SizedBox(
+                                                  width: 400,
+                                                  height: 200,
+                                                  child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                          strokeWidth: 3,
+                                                        ),
+                                                  ),
+                                                ),
                                             width: 400,
-                                            height: 50,
+                                            height: 200,
                                             errorWidget: (context, url, error) {
                                               return Icon(
                                                 Icons.error,
@@ -279,8 +289,15 @@ class _CustomerHomeState extends State<CustomerHome> {
                                         width:
                                             MediaQuery.of(context).size.width,
                                         height: 255,
-                                        child: ListView.builder(
+                                        child: GridView.builder(
                                           itemCount: entries.length,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 12,
+                                                mainAxisSpacing: 12,
+                                                childAspectRatio: 0.85,
+                                              ),
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             final entry = entries[index];
@@ -321,9 +338,7 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     // 2x2 thumbnail grid (up to 4)
-                                                    SizedBox(
-                                                      width: 199.56,
-                                                      height: 200,
+                                                    Expanded(
                                                       child: GridView.builder(
                                                         physics:
                                                             const NeverScrollableScrollPhysics(),
@@ -348,11 +363,23 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                                   8,
                                                                 ),
                                                             child: CachedNetworkImage(
-                                                              width: 90.71,
-                                                              height: 75,
+                                                              placeholder:
+                                                                  (
+                                                                    context,
+                                                                    url,
+                                                                  ) => Container(
+                                                                    color:
+                                                                        Colors
+                                                                            .grey[200],
+                                                                    child: Center(
+                                                                      child: CircularProgressIndicator(
+                                                                        strokeWidth:
+                                                                            2,
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                               imageUrl: url,
                                                               fit: BoxFit.cover,
-
                                                               errorWidget:
                                                                   (
                                                                     c,
@@ -374,22 +401,26 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Text(
-                                                          categoryKey.replaceAll(
-                                                            '_',
-                                                            ' ',
-                                                          ), // from ENUM_NAME to readable
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                          style:
-                                                              const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            categoryKey.replaceAll(
+                                                              '_',
+                                                              ' ',
+                                                            ), // from ENUM_NAME to readable
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style:
+                                                                const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                          ),
                                                         ),
-                                                        SizedBox(width: 30),
+                                                        const SizedBox(
+                                                          width: 8,
+                                                        ),
                                                         Container(
                                                           padding:
                                                               const EdgeInsets.symmetric(
@@ -518,6 +549,17 @@ class _CustomerHomeState extends State<CustomerHome> {
                                               borderRadius:
                                                   BorderRadius.circular(100),
                                               child: CachedNetworkImage(
+                                                placeholder:
+                                                    (context, url) => SizedBox(
+                                                      width: 70,
+                                                      height: 70,
+                                                      child: Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                              strokeWidth: 2,
+                                                            ),
+                                                      ),
+                                                    ),
                                                 width: 70,
                                                 height: 70,
                                                 imageUrl:
@@ -635,6 +677,20 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                                 child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (
+                                                        context,
+                                                        url,
+                                                      ) => SizedBox(
+                                                        width: 140,
+                                                        height: 140,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                              ),
+                                                        ),
+                                                      ),
                                                   width: 140,
                                                   height: 140,
                                                   imageUrl:
@@ -769,6 +825,20 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                                 child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (
+                                                        context,
+                                                        url,
+                                                      ) => SizedBox(
+                                                        width: 109,
+                                                        height: 115,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                              ),
+                                                        ),
+                                                      ),
                                                   width: 109,
                                                   height: 115,
                                                   imageUrl:
@@ -934,6 +1004,20 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                                 child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (
+                                                        context,
+                                                        url,
+                                                      ) => SizedBox(
+                                                        width: 115,
+                                                        height: 115,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                              ),
+                                                        ),
+                                                      ),
                                                   width: 115,
                                                   height: 115,
                                                   imageUrl:
@@ -1076,6 +1160,20 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                                 child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (
+                                                        context,
+                                                        url,
+                                                      ) => SizedBox(
+                                                        width: 100,
+                                                        height: 100,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                              ),
+                                                        ),
+                                                      ),
                                                   width: 100,
                                                   height: 100,
                                                   imageUrl:
@@ -1209,6 +1307,16 @@ class _CustomerHomeState extends State<CustomerHome> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: CachedNetworkImage(
+                            placeholder:
+                                (context, url) => SizedBox(
+                                  width: 155,
+                                  height: 171,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                ),
                             width: 155,
                             height: 171,
                             imageUrl: product['productImage'].first ?? '',
