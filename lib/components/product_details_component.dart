@@ -428,7 +428,7 @@ class ProductDetailsComponentState extends State<ProductDetailsComponent> {
                     fontFamily: AppConstants.fontFamilyRaleway,
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
-                    color: Colors.grey[600],
+                    color: Colors.red[600],
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),

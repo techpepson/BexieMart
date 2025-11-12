@@ -1,5 +1,6 @@
 import 'package:bexie_mart/components/product_details_component.dart';
 import 'package:bexie_mart/routes/customer_route.dart';
+import 'package:bexie_mart/routes/vendor_route.dart';
 import 'package:bexie_mart/screens/auth/account_detail.dart';
 import 'package:bexie_mart/screens/auth/forgot_password_screen.dart';
 import 'package:bexie_mart/screens/auth/login.dart';
@@ -358,6 +359,126 @@ final GoRouter appRouter = GoRouter(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
                   child: CustomerWallet(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    //vendor routes
+    StatefulShellRoute.indexedStack(
+      builder:
+          (context, state, navigationShell) =>
+              VendorRoute(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          initialLocation: '/vendor-home',
+          routes: [
+            GoRoute(
+              path: '/vendor-home',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: Placeholder(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/vendor-products',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: Placeholder(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/vendor-orders',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: Placeholder(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/vendor-earnings',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: Placeholder(),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/settings',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  transitionDuration: Duration(milliseconds: 300),
+                  key: state.pageKey,
+                  child: Placeholder(),
                   transitionsBuilder: (
                     context,
                     animation,

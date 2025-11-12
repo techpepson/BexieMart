@@ -267,17 +267,23 @@ class _CustomerHomeState extends State<CustomerHome> {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context.push(
+                                            '/all-products',
+                                            extra: {
+                                              'items': products,
+                                              'ownerCurrency': ownerCurrency,
+                                              'title': 'All Products',
+                                            },
+                                          );
+                                        },
                                         child: Text(
                                           'See All',
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.titleMedium?.copyWith(
-                                            color: AppConstants.textColor,
+                                          style: TextStyle(
+                                            color: AppConstants.primaryColor,
                                             fontFamily:
                                                 AppConstants.fontFamilyRaleway,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                       ),
@@ -286,9 +292,8 @@ class _CustomerHomeState extends State<CustomerHome> {
                                   entries.isEmpty
                                       ? EmptyWidget()
                                       : SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 255,
+                                        width: 500,
+                                        height: 360,
                                         child: GridView.builder(
                                           itemCount: entries.length,
                                           gridDelegate:
@@ -296,7 +301,7 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                 crossAxisCount: 2,
                                                 crossAxisSpacing: 12,
                                                 mainAxisSpacing: 12,
-                                                childAspectRatio: 0.85,
+                                                childAspectRatio: 0.98,
                                               ),
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
@@ -323,128 +328,148 @@ class _CustomerHomeState extends State<CustomerHome> {
                                                     )
                                                     .toList();
 
-                                            return Card(
-                                              elevation: 0.5,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(
-                                                  8.0,
+                                            return InkWell(
+                                              onTap:
+                                                  () => context.push(
+                                                    '/all-products',
+                                                    extra: {
+                                                      'items':
+                                                          productsInCategory,
+                                                      'ownerCurrency':
+                                                          ownerCurrency,
+                                                      'title': categoryKey
+                                                          .replaceAll('_', ' '),
+                                                    },
+                                                  ),
+                                              child: Card(
+                                                elevation: 0.5,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    // 2x2 thumbnail grid (up to 4)
-                                                    Expanded(
-                                                      child: GridView.builder(
-                                                        physics:
-                                                            const NeverScrollableScrollPhysics(),
-                                                        gridDelegate:
-                                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                              crossAxisCount: 2,
-                                                              mainAxisSpacing:
-                                                                  6,
-                                                              crossAxisSpacing:
-                                                                  6,
-                                                            ),
-                                                        itemCount:
-                                                            thumbs.length,
-                                                        itemBuilder: (
-                                                          context,
-                                                          i,
-                                                        ) {
-                                                          final url = thumbs[i];
-                                                          return ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                  8,
-                                                                ),
-                                                            child: CachedNetworkImage(
-                                                              placeholder:
-                                                                  (
-                                                                    context,
-                                                                    url,
-                                                                  ) => Container(
-                                                                    color:
-                                                                        Colors
-                                                                            .grey[200],
-                                                                    child: Center(
-                                                                      child: CircularProgressIndicator(
-                                                                        strokeWidth:
-                                                                            2,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    12.0,
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      // 2x2 thumbnail grid (up to 4)
+                                                      Expanded(
+                                                        child: GridView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          gridDelegate:
+                                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    2,
+                                                                mainAxisSpacing:
+                                                                    6,
+                                                                crossAxisSpacing:
+                                                                    6,
+                                                              ),
+                                                          itemCount:
+                                                              thumbs.length,
+                                                          itemBuilder: (
+                                                            context,
+                                                            i,
+                                                          ) {
+                                                            final url =
+                                                                thumbs[i];
+                                                            return ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                    8,
+                                                                  ),
+                                                              child: CachedNetworkImage(
+                                                                placeholder:
+                                                                    (
+                                                                      context,
+                                                                      url,
+                                                                    ) => Container(
+                                                                      color:
+                                                                          Colors
+                                                                              .grey[200],
+                                                                      child: Center(
+                                                                        child: CircularProgressIndicator(
+                                                                          strokeWidth:
+                                                                              2,
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                              imageUrl: url,
-                                                              fit: BoxFit.cover,
-                                                              errorWidget:
-                                                                  (
-                                                                    c,
-                                                                    u,
-                                                                    e,
-                                                                  ) => const Icon(
-                                                                    Icons
-                                                                        .broken_image,
+                                                                imageUrl: url,
+                                                                fit:
+                                                                    BoxFit
+                                                                        .cover,
+                                                                errorWidget:
+                                                                    (
+                                                                      c,
+                                                                      u,
+                                                                      e,
+                                                                    ) => const Icon(
+                                                                      Icons
+                                                                          .broken_image,
+                                                                    ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      // Bottom: Category name + count
+                                                      const SizedBox(height: 8),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              categoryKey
+                                                                  .replaceAll(
+                                                                    '_',
+                                                                    ' ',
+                                                                  ), // from ENUM_NAME to readable
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets.symmetric(
+                                                                  horizontal: 8,
+                                                                  vertical: 2,
+                                                                ),
+                                                            decoration: BoxDecoration(
+                                                              color:
+                                                                  Colors
+                                                                      .black12,
+                                                              shape:
+                                                                  BoxShape
+                                                                      .rectangle,
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                    20,
                                                                   ),
                                                             ),
-                                                          );
-                                                        },
+                                                            child: Text(
+                                                              '${productsInCategory.length}',
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                    // Bottom: Category name + count
-                                                    const SizedBox(height: 8),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            categoryKey.replaceAll(
-                                                              '_',
-                                                              ' ',
-                                                            ), // from ENUM_NAME to readable
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style:
-                                                                const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Container(
-                                                          padding:
-                                                              const EdgeInsets.symmetric(
-                                                                horizontal: 8,
-                                                                vertical: 2,
-                                                              ),
-                                                          decoration: BoxDecoration(
-                                                            color:
-                                                                Colors.black12,
-                                                            shape:
-                                                                BoxShape
-                                                                    .rectangle,
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                  20,
-                                                                ),
-                                                          ),
-                                                          child: Text(
-                                                            '${productsInCategory.length}',
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             );
@@ -489,14 +514,11 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     },
                                     child: Text(
                                       'See All',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleLarge?.copyWith(
-                                        color: AppConstants.textColor,
+                                      style: TextStyle(
+                                        color: AppConstants.primaryColor,
                                         fontFamily:
                                             AppConstants.fontFamilyRaleway,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -617,14 +639,11 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     },
                                     child: Text(
                                       'See All',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleLarge?.copyWith(
-                                        color: AppConstants.textColor,
+                                      style: TextStyle(
+                                        color: AppConstants.primaryColor,
                                         fontFamily:
                                             AppConstants.fontFamilyRaleway,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -673,36 +692,44 @@ class _CustomerHomeState extends State<CustomerHome> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: CachedNetworkImage(
-                                                  placeholder:
-                                                      (
-                                                        context,
-                                                        url,
-                                                      ) => SizedBox(
-                                                        width: 140,
-                                                        height: 140,
-                                                        child: Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                                strokeWidth: 2,
-                                                              ),
+                                              InkWell(
+                                                onTap:
+                                                    () => context.push(
+                                                      '/product-details',
+                                                      extra: {'item': product},
+                                                    ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  child: CachedNetworkImage(
+                                                    placeholder:
+                                                        (
+                                                          context,
+                                                          url,
+                                                        ) => SizedBox(
+                                                          width: 140,
+                                                          height: 140,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      2,
+                                                                ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                  width: 140,
-                                                  height: 140,
-                                                  imageUrl:
-                                                      product['productImage']
-                                                          .first ??
-                                                      '',
+                                                    width: 140,
+                                                    height: 140,
+                                                    imageUrl:
+                                                        product['productImage']
+                                                            .first ??
+                                                        '',
 
-                                                  fit: BoxFit.cover,
-                                                  errorWidget:
-                                                      (c, u, e) => const Icon(
-                                                        Icons.broken_image,
-                                                      ),
+                                                    fit: BoxFit.cover,
+                                                    errorWidget:
+                                                        (c, u, e) => const Icon(
+                                                          Icons.broken_image,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                               Text(
@@ -790,7 +817,7 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 : Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: SizedBox(
-                                    height: 250,
+                                    height: 300,
                                     child: GridView.builder(
                                       itemCount: discountedProducts.length,
                                       gridDelegate:
@@ -821,36 +848,44 @@ class _CustomerHomeState extends State<CustomerHome> {
                                           ),
                                           child: Stack(
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: CachedNetworkImage(
-                                                  placeholder:
-                                                      (
-                                                        context,
-                                                        url,
-                                                      ) => SizedBox(
-                                                        width: 109,
-                                                        height: 115,
-                                                        child: Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                                strokeWidth: 2,
-                                                              ),
+                                              InkWell(
+                                                onTap:
+                                                    () => context.push(
+                                                      '/product-details',
+                                                      extra: {'item': product},
+                                                    ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  child: CachedNetworkImage(
+                                                    placeholder:
+                                                        (
+                                                          context,
+                                                          url,
+                                                        ) => SizedBox(
+                                                          width: 109,
+                                                          height: 115,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      2,
+                                                                ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                  width: 109,
-                                                  height: 115,
-                                                  imageUrl:
-                                                      product['productImage']
-                                                          .first ??
-                                                      '',
+                                                    width: 109,
+                                                    height: 115,
+                                                    imageUrl:
+                                                        product['productImage']
+                                                            .first ??
+                                                        '',
 
-                                                  fit: BoxFit.cover,
-                                                  errorWidget:
-                                                      (c, u, e) => const Icon(
-                                                        Icons.broken_image,
-                                                      ),
+                                                    fit: BoxFit.cover,
+                                                    errorWidget:
+                                                        (c, u, e) => const Icon(
+                                                          Icons.broken_image,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                               Positioned(
@@ -959,13 +994,11 @@ class _CustomerHomeState extends State<CustomerHome> {
                                     },
                                     child: Text(
                                       'See All',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleMedium?.copyWith(
+                                      style: TextStyle(
+                                        color: AppConstants.primaryColor,
                                         fontFamily:
-                                            AppConstants.fontFamilyNunito,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 25,
+                                            AppConstants.fontFamilyRaleway,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -1000,36 +1033,44 @@ class _CustomerHomeState extends State<CustomerHome> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: CachedNetworkImage(
-                                                  placeholder:
-                                                      (
-                                                        context,
-                                                        url,
-                                                      ) => SizedBox(
-                                                        width: 115,
-                                                        height: 115,
-                                                        child: Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                                strokeWidth: 2,
-                                                              ),
+                                              InkWell(
+                                                onTap:
+                                                    () => context.push(
+                                                      '/product-details',
+                                                      extra: {'item': product},
+                                                    ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  child: CachedNetworkImage(
+                                                    placeholder:
+                                                        (
+                                                          context,
+                                                          url,
+                                                        ) => SizedBox(
+                                                          width: 115,
+                                                          height: 115,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      2,
+                                                                ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                  width: 115,
-                                                  height: 115,
-                                                  imageUrl:
-                                                      product['productImage']
-                                                          .first ??
-                                                      '',
+                                                    width: 115,
+                                                    height: 115,
+                                                    imageUrl:
+                                                        product['productImage']
+                                                            .first ??
+                                                        '',
 
-                                                  fit: BoxFit.cover,
-                                                  errorWidget:
-                                                      (c, u, e) => const Icon(
-                                                        Icons.broken_image,
-                                                      ),
+                                                    fit: BoxFit.cover,
+                                                    errorWidget:
+                                                        (c, u, e) => const Icon(
+                                                          Icons.broken_image,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                               Row(
@@ -1128,7 +1169,7 @@ class _CustomerHomeState extends State<CustomerHome> {
                                 : Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: SizedBox(
-                                    height: 240,
+                                    height: 300,
                                     child: GridView.builder(
                                       itemCount: userFavorite.length,
                                       gridDelegate:
@@ -1156,36 +1197,44 @@ class _CustomerHomeState extends State<CustomerHome> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: CachedNetworkImage(
-                                                  placeholder:
-                                                      (
-                                                        context,
-                                                        url,
-                                                      ) => SizedBox(
-                                                        width: 100,
-                                                        height: 100,
-                                                        child: Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                                strokeWidth: 2,
-                                                              ),
+                                              InkWell(
+                                                onTap:
+                                                    () => context.push(
+                                                      '/product-details',
+                                                      extra: {'item': product},
+                                                    ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  child: CachedNetworkImage(
+                                                    placeholder:
+                                                        (
+                                                          context,
+                                                          url,
+                                                        ) => SizedBox(
+                                                          width: 100,
+                                                          height: 100,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      2,
+                                                                ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                  width: 100,
-                                                  height: 100,
-                                                  imageUrl:
-                                                      product['productImage']
-                                                          .first ??
-                                                      '',
+                                                    width: 100,
+                                                    height: 100,
+                                                    imageUrl:
+                                                        product['productImage']
+                                                            .first ??
+                                                        '',
 
-                                                  fit: BoxFit.cover,
-                                                  errorWidget:
-                                                      (c, u, e) => const Icon(
-                                                        Icons.broken_image,
-                                                      ),
+                                                    fit: BoxFit.cover,
+                                                    errorWidget:
+                                                        (c, u, e) => const Icon(
+                                                          Icons.broken_image,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                               Text(

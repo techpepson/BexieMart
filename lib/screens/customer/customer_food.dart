@@ -4,6 +4,7 @@ import 'package:bexie_mart/data/products_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomerFood extends StatefulWidget {
   const CustomerFood({super.key});
@@ -500,7 +501,9 @@ class _CustomerFoodState extends State<CustomerFood> {
               double newAmount = foodPrice - discountAmount;
 
               return InkWell(
-                onTap: () {},
+                onTap:
+                    () =>
+                        context.push('/product-details', extra: {'item': food}),
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   decoration: BoxDecoration(

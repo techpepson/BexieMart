@@ -1,6 +1,7 @@
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AllItemsDisplayComponent extends StatefulWidget {
   AllItemsDisplayComponent({
@@ -100,16 +101,24 @@ class _AllItemsDisplayComponentState extends State<AllItemsDisplayComponent> {
                       ),
                       // width: 140,
                       height: 181,
-                      child: ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(8.0),
-                        child: CachedNetworkImage(
-                          imageUrl: itemImg,
-                          fit: BoxFit.cover,
-                          errorWidget:
-                              (context, url, error) => Icon(Icons.broken_image),
-                          placeholder:
-                              (context, url) =>
-                                  Center(child: CircularProgressIndicator()),
+                      child: InkWell(
+                        onTap:
+                            () => context.push(
+                              '/product-details',
+                              extra: {'item': item},
+                            ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(8.0),
+                          child: CachedNetworkImage(
+                            imageUrl: itemImg,
+                            fit: BoxFit.cover,
+                            errorWidget:
+                                (context, url, error) =>
+                                    Icon(Icons.broken_image),
+                            placeholder:
+                                (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                          ),
                         ),
                       ),
                     ),
