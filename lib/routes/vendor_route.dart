@@ -28,13 +28,14 @@ class _VendorRouteState extends State<VendorRoute> {
             color: AppConstants.textColor,
           ),
         ),
-        centerTitle: true,
+        centerTitle: false,
         actions: [
-          CircleAvatar(
+          ClipOval(
             child: CachedNetworkImage(
-              width: 30,
-              height: 30,
+              width: 35,
+              height: 35,
               imageUrl: userProfile,
+              fit: BoxFit.cover,
               errorWidget: (context, url, error) => Icon(Icons.person),
               placeholder:
                   (context, url) => SizedBox(
@@ -45,7 +46,13 @@ class _VendorRouteState extends State<VendorRoute> {
             ),
           ),
           SizedBox(width: 16),
-          IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.notifications),
+            color: AppConstants.primaryColor,
+            onPressed: () {
+              context.push('/notifications');
+            },
+          ),
           SizedBox(width: 16),
         ],
       ),

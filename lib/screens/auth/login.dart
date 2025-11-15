@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
       // Replace the route so this page is disposed and spinner can't persist
-      context.go(isFirstTime ? '/onboard' : '/');
+      context.go(isFirstTime ? '/onboard' : '/vendor-home');
     } catch (e) {
       if (mounted) {
         setState(() => isLoading = false);

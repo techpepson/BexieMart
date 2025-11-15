@@ -19,6 +19,10 @@ import 'package:bexie_mart/screens/customer/recently_viewed.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:bexie_mart/screens/payments/payment_screen.dart';
+import 'package:bexie_mart/screens/vendor/vendor_dashboard.dart';
+import 'package:bexie_mart/screens/vendor/vendor_earnings.dart';
+import 'package:bexie_mart/screens/vendor/vendor_orders.dart';
+import 'package:bexie_mart/screens/vendor/vendor_products.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -390,7 +394,7 @@ final GoRouter appRouter = GoRouter(
                 return CustomTransitionPage(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
-                  child: Placeholder(),
+                  child: VendorDashboard(),
                   transitionsBuilder: (
                     context,
                     animation,
@@ -412,7 +416,7 @@ final GoRouter appRouter = GoRouter(
                 return CustomTransitionPage(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
-                  child: Placeholder(),
+                  child: VendorProducts(),
                   transitionsBuilder: (
                     context,
                     animation,
@@ -434,7 +438,7 @@ final GoRouter appRouter = GoRouter(
                 return CustomTransitionPage(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
-                  child: Placeholder(),
+                  child: VendorOrders(),
                   transitionsBuilder: (
                     context,
                     animation,
@@ -456,7 +460,7 @@ final GoRouter appRouter = GoRouter(
                 return CustomTransitionPage(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
-                  child: Placeholder(),
+                  child: VendorEarnings(),
                   transitionsBuilder: (
                     context,
                     animation,

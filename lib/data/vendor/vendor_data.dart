@@ -203,7 +203,7 @@ class VendorData {
     },
     {
       'orderNumber': '#123456',
-      'orderStatus': 'pending',
+      'orderStatus': 'delivered',
       'orderDate': '2025-11-12',
       'orderPaymentMethod': 'mobileMoney',
       'orderTotalAmount': 17.00,

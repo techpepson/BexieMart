@@ -1,4 +1,5 @@
 import 'package:bexie_mart/constants/app_constants.dart';
+import 'package:bexie_mart/services/app_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -166,5 +167,91 @@ class AppServices {
         ),
       );
     }
+  }
+
+  List<Map<String, dynamic>> getItemsOverMonth(
+    List<Map<String, dynamic>> items,
+  ) {
+    DateTime now = DateTime.now();
+    List<Map<String, dynamic>> newItems =
+        items
+            .where(
+              (item) => parseStringToDate(item['orderDate']).month == now.month,
+            )
+            .toList();
+
+    return newItems;
+  }
+
+  List<Map<String, dynamic>> getItemByStatus(
+    String status,
+    List<Map<String, dynamic>> items,
+  ) {
+    List<Map<String, dynamic>> newItems =
+        items.where((item) => item['orderStatus'] == status).toList();
+
+    return newItems;
+  }
+
+  List<Map<String, dynamic>> getTotalOrdersPerPeriod(
+    List<Map<String, dynamic>> items,
+    int month,
+  ) {
+    DateTime today = DateTime.now();
+
+    List<Map<String, dynamic>> orders =
+        items.where((order) {
+          String orderDateAsString = order['orderDate'];
+          DateTime orderDateAsDate = parseStringToDate(orderDateAsString);
+
+          return orderDateAsDate.month == month &&
+              orderDateAsDate.year == today.year;
+        }).toList();
+
+    return orders;
+  }
+
+  double getTotalCount(List<Map<String, dynamic>> items) {
+    double totalOrders = items.fold(
+      0.0,
+      (sum, order) => sum + (order['orderTotalAmount'] ?? 0),
+    );
+
+    return double.parse(totalOrders.toString());
+  }
+
+  List<SalesData> getMonthlySales(List<Map<String, dynamic>> orders) {
+    Map<int, double> monthlyTotals = {for (int i = 1; i <= 12; i++) i: 0.0};
+
+    for (var order in orders) {
+      DateTime date = parseStringToDate(order['orderDate']);
+      double amount = (order['orderTotalAmount'] ?? 0).toDouble();
+
+      monthlyTotals[date.month] = monthlyTotals[date.month]! + amount;
+    }
+
+    return monthlyTotals.entries
+        .map((e) => SalesData(_monthName(e.key), e.value))
+        .toList();
+  }
+
+  String _monthName(int month) {
+    const names = [
+      "",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return names[month];
   }
 }
