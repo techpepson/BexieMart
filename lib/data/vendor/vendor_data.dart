@@ -5,6 +5,7 @@ class VendorData {
     {
       'productId': 1,
       'productColor': 'Red',
+      "isAvailable": true,
       'shop': {
         'shopName': 'Jean Collections',
         'shopOwnerImage':
@@ -32,7 +33,7 @@ class VendorData {
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
-      'productPrice': '100',
+      'productPrice': 100.00,
       'productDescription': 'This is a shoe',
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
@@ -69,6 +70,7 @@ class VendorData {
     },
     {
       'productId': 9,
+      "isAvailable": true,
       'productName': 'Shoe',
       'productColor': 'Red',
       'deliveryOptions': [
@@ -91,7 +93,7 @@ class VendorData {
       'productImage': [
         'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
       ],
-      'productPrice': '100',
+      'productPrice': 100.00,
       'productDescription': 'This is a shoe',
       'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
       'uploadDate': '2025-09-25',
@@ -164,7 +166,7 @@ class VendorData {
           'productImage': [
             'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
           ],
-          'productPrice': '100',
+          'productPrice': 100.00,
           'productDescription': 'This is a shoe',
           'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
           'uploadDate': '2025-09-25',
@@ -236,7 +238,7 @@ class VendorData {
           'productImage': [
             'https://plus.unsplash.com/premium_photo-1670509045675-af9f249b1bbe?w=500&auto=format&fit=crop&q=60',
           ],
-          'productPrice': '100',
+          'productPrice': 100.00,
           'productDescription': 'This is a shoe',
           'productCategory': ProductsCategories.FASHION_AND_APPAREL.name,
           'uploadDate': '2025-09-25',

@@ -14,8 +14,12 @@ class AppConstants {
   static const Color accentColor = Color(0xFFCD853F);
   static const Color successColor = Color.fromARGB(255, 8, 168, 29);
   static const Color textColor = Color(0xFF202020);
+  static const Color primaryText = Color(0xFF111322);
+  static const Color textSecondary = Color(0xFF5F6C7B);
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFB3261E);
+  static const Color warningColor = Color(0xFFF59E0B);
+  static const Color borderColor = Color(0xFFE4E7EC);
   static const Color greyedColor = Color.fromARGB(255, 219, 216, 216);
   static const Color fadedBlue = Color(0xFFE5EBFC);
   static const Color fadedRed = Color(0xFFFFEBEB);
