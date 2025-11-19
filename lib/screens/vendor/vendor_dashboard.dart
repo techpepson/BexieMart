@@ -3,6 +3,7 @@ import 'package:bexie_mart/data/vendor/vendor_data.dart';
 import 'package:bexie_mart/services/app_data.dart';
 import 'package:bexie_mart/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class VendorDashboard extends StatefulWidget {
@@ -163,7 +164,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                 {
                   'icon': Icons.add_circle_outline,
                   'title': 'Add Product',
-                  'location': '',
+                  'location': '/vendor-add-products',
                 },
                 {
                   'icon': Icons.shopping_bag_outlined,
@@ -188,7 +189,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
               ];
               return _buildQuickActionItem(
                 actions[index]['icon'] as IconData,
-                () => {},
+                () => context.push(actions[index]['location'] as String),
                 actions[index]['title'] as String,
               );
             },

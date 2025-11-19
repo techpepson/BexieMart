@@ -19,6 +19,7 @@ import 'package:bexie_mart/screens/customer/recently_viewed.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:bexie_mart/screens/payments/payment_screen.dart';
+import 'package:bexie_mart/screens/vendor/add_products.dart';
 import 'package:bexie_mart/screens/vendor/edit_products_screen.dart';
 import 'package:bexie_mart/screens/vendor/vendor_dashboard.dart';
 import 'package:bexie_mart/screens/vendor/vendor_earnings.dart';
@@ -36,6 +37,19 @@ final GoRouter appRouter = GoRouter(
           transitionDuration: Duration(milliseconds: 300),
           key: state.pageKey,
           child: LaunchScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: '/vendor-add-products',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          key: state.pageKey,
+          child: AddProducts(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:bexie_mart/components/elevated_button_widget.dart';
 
 class ModalWidget extends StatelessWidget {
-  const ModalWidget({
+  ModalWidget({
     super.key,
     required this.title,
     required this.description,
-    required this.buttonTitle,
+    this.buttonTitle = '',
     this.buttonAction,
     this.isSuccessModal = true,
+    this.requiresActionButton = true,
   });
 
   final String title;
   final String description;
-  final String buttonTitle;
+  String buttonTitle = '';
   final Function()? buttonAction;
   final bool isSuccessModal;
+  bool requiresActionButton = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +54,12 @@ class ModalWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                CustomButtonWidget(
-                  buttonTitle: buttonTitle,
-                  onPressed: buttonAction,
-                ),
+                requiresActionButton
+                    ? CustomButtonWidget(
+                      buttonTitle: buttonTitle,
+                      onPressed: buttonAction,
+                    )
+                    : SizedBox.shrink(),
               ],
             ),
           ),

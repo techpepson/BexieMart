@@ -127,7 +127,9 @@ class _VendorProductsState extends State<VendorProducts> {
         // _buildFilterButton(),
         const SizedBox(width: 12),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            context.push('/vendor-add-products');
+          },
           icon: const Icon(Icons.add),
           label: const Text('New product'),
           style: ElevatedButton.styleFrom(
