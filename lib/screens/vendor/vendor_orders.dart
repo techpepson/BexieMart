@@ -1,6 +1,7 @@
 import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:bexie_mart/data/vendor/vendor_data.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class VendorOrders extends StatefulWidget {
   const VendorOrders({super.key});
@@ -401,29 +402,43 @@ class _VendorOrdersState extends State<VendorOrders> {
               Row(
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(
+                        '/vendor-orders/order-details',
+                        extra: {'order': order},
+                      );
+                    },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          strokeAlign: 2.0,
+                          color: AppConstants.primaryColor,
+                          width: 1.5,
+                          style: BorderStyle.solid,
+                        ),
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    child: const Text('Details'),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppConstants.primaryColor,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text('Update status'),
+                    child: const Text(
+                      'Details',
+                      style: TextStyle(color: AppConstants.primaryColor),
                     ),
                   ),
+                  const SizedBox(width: 12),
+                  // Expanded(
+                  //   child: ElevatedButton(
+                  //     onPressed: () {},
+                  //     style: ElevatedButton.styleFrom(
+                  //       backgroundColor: AppConstants.primaryColor,
+                  //       foregroundColor: Colors.white,
+                  //       padding: const EdgeInsets.symmetric(vertical: 14),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(14),
+                  //       ),
+                  //     ),
+                  //     child: const Text('Update status'),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
