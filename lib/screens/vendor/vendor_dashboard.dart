@@ -169,7 +169,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                 {
                   'icon': Icons.shopping_bag_outlined,
                   'title': 'View Orders',
-                  'location': '',
+                  'location': '/vendor-orders',
                 },
                 {
                   'icon': Icons.local_offer_outlined,
@@ -179,7 +179,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                 {
                   'icon': Icons.trending_up_outlined,
                   'title': 'Check Earnings',
-                  'location': '',
+                  'location': '/vendor-earnings',
                 },
                 {
                   'icon': Icons.account_balance_outlined,

@@ -312,4 +312,58 @@ class VendorData {
       'logDate': '2025-11-12',
     },
   ];
+
+  List<Map<String, dynamic>> recentEarnings = [
+    {
+      'earningNumber': "#123456",
+      'earningAmount': 500.0,
+      'earningStatus': 'pending',
+      'earningDate': '2025-11-21',
+    },
+    {
+      'earningNumber': "#123456",
+      'earningAmount': 500.0,
+      'earningStatus': 'pending',
+      'earningDate': '2025-11-21',
+    },
+    {
+      'earningNumber': "#123456",
+      'earningAmount': 500.0,
+      'earningStatus': 'paid',
+      'earningDate': '2025-11-21',
+    },
+    {
+      'earningNumber': "#123456",
+      'earningAmount': 500.0,
+      'earningStatus': 'pending',
+      'earningDate': '2025-11-21',
+    },
+  ];
+
+  List<Map<String, dynamic>> withdrawalHistory = [
+    {
+      'withdrawalId': "#123456",
+      'withdrawalAmount': 500.0,
+      'withdrawalStatus': 'pending',
+      'withdrawalDate': '2025-11-21',
+    },
+    {
+      'withdrawalNumber': "#123456",
+      'withdrawalAmount': 500.0,
+      'withdrawalStatus': 'pending',
+      'withdrawalDate': '2025-11-21',
+    },
+    {
+      'withdrawalNumber': "#123456",
+      'withdrawalAmount': 500.0,
+      'withdrawalStatus': 'paid',
+      'withdrawalDate': '2025-11-21',
+    },
+    {
+      'withdrawalNumber': "#123456",
+      'withdrawalAmount': 500.0,
+      'withdrawalStatus': 'pending',
+      'withdrawalDate': '2025-11-21',
+    },
+  ];
 }

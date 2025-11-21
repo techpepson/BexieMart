@@ -25,6 +25,7 @@ import 'package:bexie_mart/screens/vendor/vendor_dashboard.dart';
 import 'package:bexie_mart/screens/vendor/vendor_earnings.dart';
 import 'package:bexie_mart/screens/vendor/vendor_order_details.dart';
 import 'package:bexie_mart/screens/vendor/vendor_orders.dart';
+import 'package:bexie_mart/screens/vendor/vendor_payment.dart';
 import 'package:bexie_mart/screens/vendor/vendor_products.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -530,6 +531,26 @@ final GoRouter appRouter = GoRouter(
                   },
                 );
               },
+              routes: [
+                GoRoute(
+                  path: 'payment-screen',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: VendorPayment(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

@@ -250,11 +250,6 @@ class _VendorProductsState extends State<VendorProducts> {
                 ? item['productStock'] as int
                 : int.tryParse(item['productStock']?.toString() ?? '') ?? 0;
 
-        final rating =
-            item['productRating'] is num
-                ? (item['productRating'] as num).toDouble()
-                : double.tryParse(item['productRating']?.toString() ?? '') ?? 0;
-
         return filtered.isEmpty
             ? EmptyWidget()
             : Container(
@@ -274,170 +269,115 @@ class _VendorProductsState extends State<VendorProducts> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Product Image
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(12),
                     child: CachedNetworkImage(
-                      width: 96,
-                      height: 96,
+                      width: 100,
+                      height: 100,
                       fit: BoxFit.cover,
                       imageUrl: productImage,
                       errorWidget:
                           (_, __, ___) => Container(
-                            color: AppConstants.backgroundColor,
-                            child: const Icon(Icons.broken_image),
+                            width: 100,
+                            height: 100,
+                            color: Colors.grey[200],
+                            child: const Icon(
+                              Icons.broken_image,
+                              color: Colors.grey,
+                            ),
                           ),
                       placeholder:
-                          (_, __) => const SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                          (_, __) => Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
                           ),
                     ),
                   ),
                   const SizedBox(width: 16),
+                  // Product Details Column
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                productName,
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.more_horiz),
-                            ),
-                          ],
+                        // Product Name
+                        Text(
+                          productName,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.grey[900],
+                          ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 6),
+                        // Description
                         Text(
                           description,
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: AppConstants.textSecondary,
+                            color: Colors.grey[600],
+                            fontSize: 13,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 8),
+                        // Price
+                        Text(
+                          '${ownerCurrency == "dollars" ? "\$" : "GHS"} ${productPrice.toStringAsFixed(2)}',
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.grey[900],
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        Wrap(
-                          spacing: 12,
-                          runSpacing: 8,
-                          children: [
-                            _buildInfoChip(
-                              label: 'Price',
-                              value:
-                                  '${ownerCurrency == "dollars" ? "\$" : "GHS"} ${productPrice.toStringAsFixed(2)}',
-                              icon: Icons.attach_money,
-                              color: AppConstants.primaryColor.withOpacity(
-                                0.12,
-                              ),
-                            ),
-                            _buildInfoChip(
-                              label: 'Stock',
-                              value: stock > 0 ? '$stock pcs' : 'Out of stock',
-                              icon:
-                                  stock > 0
-                                      ? Icons.check_circle
-                                      : Icons.pause_circle,
-                              color:
-                                  stock > 0
-                                      ? AppConstants.successColor.withOpacity(
-                                        0.12,
-                                      )
-                                      : AppConstants.errorColor.withOpacity(
-                                        0.12,
-                                      ),
-                            ),
-                            _buildInfoChip(
-                              label: 'Rating',
-                              value:
-                                  rating == 0
-                                      ? 'New'
-                                      : rating.toStringAsFixed(1),
-                              icon: Icons.star,
-                              color: AppConstants.warningColor.withOpacity(
-                                0.12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
+                        // Stock Status with colored dot
                         Row(
                           children: [
-                            OutlinedButton.icon(
-                              onPressed: () {
-                                context.push(
-                                  '/vendor-products/edit',
-                                  extra: {'item': item},
-                                );
-                              },
-                              icon: const Icon(Icons.edit, size: 18),
-                              label: const Text('Edit'),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: AppConstants.primaryColor,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 18,
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: stock > 0 ? Colors.blue : Colors.red,
+                                shape: BoxShape.circle,
                               ),
                             ),
-                            const SizedBox(width: 12),
-                            // TextButton.icon(
-                            //   onPressed: () {},
-                            //   icon: const Icon(Icons.visibility, size: 18),
-                            //   label: const Text('View in store'),
-                            // ),
-                            const Spacer(),
-                            Switch(
-                              value: item['isAvailable'],
-                              onChanged: (value) {
-                                setState(() {
-                                  item['isAvailable'] = value;
-                                });
-                              },
+                            const SizedBox(width: 6),
+                            Text(
+                              stock > 0 ? 'In Stock' : 'Out of Stock',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: Colors.grey[600],
+                                fontSize: 13,
+                              ),
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
+                  // Edit Icon
+                  IconButton(
+                    onPressed: () {
+                      context.push(
+                        '/vendor-products/edit',
+                        extra: {'item': item},
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Colors.black87,
+                      size: 20,
+                    ),
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                  ),
                 ],
               ),
             );
       },
-    );
-  }
-
-  Widget _buildInfoChip({
-    required String label,
-    required String value,
-    required IconData icon,
-    required Color color,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: AppConstants.primaryText),
-          const SizedBox(width: 6),
-          Text(
-            '$label: $value',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
     );
   }
 

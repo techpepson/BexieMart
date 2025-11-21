@@ -254,4 +254,21 @@ class AppServices {
 
     return names[month];
   }
+
+  List<Map<String, dynamic>> getItemsThisMonth(
+    List<Map<String, dynamic>> items,
+  ) {
+    DateTime today = DateTime.now();
+
+    return items.where((item) {
+      String itemDate = item['orderDate'];
+      final parsedString = parseStringToDate(itemDate);
+
+      int currentMonth = today.month;
+      int currentYear = today.year;
+
+      return parsedString.month == currentMonth &&
+          parsedString.year == currentYear;
+    }).toList();
+  }
 }
