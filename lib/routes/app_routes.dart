@@ -19,7 +19,9 @@ import 'package:bexie_mart/screens/customer/recently_viewed.dart';
 import 'package:bexie_mart/screens/launch_screen.dart';
 import 'package:bexie_mart/screens/onboarding_screens.dart';
 import 'package:bexie_mart/screens/payments/payment_screen.dart';
+import 'package:bexie_mart/screens/vendor/add_coupon.dart';
 import 'package:bexie_mart/screens/vendor/add_products.dart';
+import 'package:bexie_mart/screens/vendor/edit_coupon.dart';
 import 'package:bexie_mart/screens/vendor/edit_products_screen.dart';
 import 'package:bexie_mart/screens/vendor/vendor_dashboard.dart';
 import 'package:bexie_mart/screens/vendor/vendor_earnings.dart';
@@ -27,6 +29,7 @@ import 'package:bexie_mart/screens/vendor/vendor_order_details.dart';
 import 'package:bexie_mart/screens/vendor/vendor_orders.dart';
 import 'package:bexie_mart/screens/vendor/vendor_payment.dart';
 import 'package:bexie_mart/screens/vendor/vendor_products.dart';
+import 'package:bexie_mart/screens/vendor/vendor_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -557,12 +560,12 @@ final GoRouter appRouter = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/settings',
+              path: '/vendor-settings',
               pageBuilder: (context, state) {
                 return CustomTransitionPage(
                   transitionDuration: Duration(milliseconds: 300),
                   key: state.pageKey,
-                  child: Placeholder(),
+                  child: VendorSettings(),
                   transitionsBuilder: (
                     context,
                     animation,
@@ -573,6 +576,44 @@ final GoRouter appRouter = GoRouter(
                   },
                 );
               },
+              routes: [
+                GoRoute(
+                  path: 'add-coupon',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: AddCoupon(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'edit-coupon',
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      transitionDuration: Duration(milliseconds: 300),
+                      key: state.pageKey,
+                      child: EditCoupon(),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

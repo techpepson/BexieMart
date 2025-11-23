@@ -340,6 +340,23 @@ class VendorData {
     },
   ];
 
+  List<Map<String, dynamic>> coupons = [
+    {
+      'couponTitle': 'First Purchase',
+      'validPeriod': '2025-12-20',
+      'couponValue': 5,
+      'couponType': 'percentage',
+      'couponDescription': 'off for your next order',
+    },
+    {
+      'couponTitle': 'Gift From Customer Care',
+      'validPeriod': '2025-12-20',
+      'couponValue': 5,
+      'couponType': 'percentage',
+      'couponDescription': 'off for your next order',
+    },
+  ];
+
   List<Map<String, dynamic>> withdrawalHistory = [
     {
       'withdrawalId': "#123456",
