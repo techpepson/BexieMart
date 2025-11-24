@@ -6,6 +6,7 @@ import 'package:bexie_mart/constants/app_constants.dart';
 import 'package:bexie_mart/data/vendor/vendor_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +25,29 @@ class _VendorSettingsState extends State<VendorSettings> {
   File? _selectedProfileImage;
   final ImagePicker _imagePicker = ImagePicker();
 
+  String terms =
+      'This is Bexiemart, an e-commerce app that is here to make your online shopping very easy and affordable';
+
   VendorData vendorData = VendorData();
+  bool acceptOrderUpdates = true;
+  bool acceptPromotions = true;
+  bool acceptNewProductAlerts = true;
+  bool acceptWalletActivities = true;
+  List<Map<String, String>> paymentCards = [
+    {
+      'brand': 'Mastercard',
+      'cardHolder': 'Amanda Morgan',
+      'cardNumber': '512345678901879',
+      'expiry': '12/24',
+    },
+  ];
+  List<Map<String, String>> mobileMoneyAccounts = [
+    {
+      'provider': 'Mobile Money',
+      'accountName': 'Amanda Morgan',
+      'accountNumber': '02412341244',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +67,9 @@ class _VendorSettingsState extends State<VendorSettings> {
         ),
         centerTitle: false,
       ),
-      body: SafeArea(child: _buildTitlesDisplay()),
+      body: SafeArea(
+        child: Column(children: [Expanded(child: _buildTitlesDisplay())]),
+      ),
     );
   }
 
@@ -74,12 +99,36 @@ class _VendorSettingsState extends State<VendorSettings> {
           return await showCoupons();
         },
       },
-      {'title': 'Payment Methods', 'action': () {}},
-      {'title': 'Notifications Settings', 'action': () {}},
-      {'title': 'FAQ & Contact Support', 'action': () {}},
-      {'title': 'Terms & Conditions', 'action': () {}},
-      {'title': 'Privacy Policy', 'action': () {}},
-      {'title': 'About Bexiemart', 'action': () {}},
+      {
+        'title': 'Payment Methods',
+        'action': () async {
+          await showPaymentMethods();
+        },
+      },
+      {
+        'title': 'Notifications Settings',
+        'action': () async {
+          await showNotifications();
+        },
+      },
+      {
+        'title': 'Terms & Conditions',
+        'action': () async {
+          return await showTerms();
+        },
+      },
+      {
+        'title': 'Privacy Policy',
+        'action': () async {
+          return await showPrivacy();
+        },
+      },
+      {
+        'title': 'About Bexiemart',
+        'action': () async {
+          return await showAbout();
+        },
+      },
     ];
 
     return ListView.builder(
@@ -121,6 +170,13 @@ class _VendorSettingsState extends State<VendorSettings> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildLogout() {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Center(child: Text('Logout')),
     );
   }
 
@@ -282,7 +338,7 @@ class _VendorSettingsState extends State<VendorSettings> {
   }
 
   Future<dynamic> showProfileSettings(BuildContext context) async {
-    return showDialog(
+    return showAdaptiveDialog(
       context: context,
       builder: (context) {
         return Dialog(
@@ -438,7 +494,7 @@ class _VendorSettingsState extends State<VendorSettings> {
   }
 
   Future<dynamic> showChangePassword() {
-    return showDialog(
+    return showAdaptiveDialog(
       context: context,
       builder: (context) {
         return Dialog(
@@ -508,7 +564,7 @@ class _VendorSettingsState extends State<VendorSettings> {
   }
 
   Future<dynamic> showShopInformation() {
-    return showDialog(
+    return showAdaptiveDialog(
       context: context,
       builder: (context) {
         return Dialog(
@@ -526,6 +582,7 @@ class _VendorSettingsState extends State<VendorSettings> {
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -538,35 +595,31 @@ class _VendorSettingsState extends State<VendorSettings> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Center(
-                        child: DottedBorder(
-                          options: const RectDottedBorderOptions(),
-                          child: Container(
-                            width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.cloud_upload_outlined,
-                                  size: 40,
+                      DottedBorder(
+                        options: RectDottedBorderOptions(),
+                        child: Container(
+                          width: 73,
+                          height: 73,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.cloud_upload_outlined,
+                                size: 40,
+                                color: AppConstants.textColor.withAlpha(150),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Upload Logo',
+                                style: TextStyle(
+                                  fontSize: 12,
                                   color: AppConstants.textColor.withAlpha(150),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Upload Logo',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppConstants.textColor.withAlpha(
-                                      150,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -686,7 +739,7 @@ class _VendorSettingsState extends State<VendorSettings> {
 
   Future<dynamic> showCoupons() async {
     List<Map<String, dynamic>> coupons = vendorData.coupons;
-    return showDialog(
+    return showAdaptiveDialog(
       context: context,
       builder: (context) {
         return Dialog(
@@ -779,7 +832,7 @@ class _VendorSettingsState extends State<VendorSettings> {
                               formattedDate =
                                   '${date.month}.${date.day}.${date.year.toString().substring(2)}';
                             } catch (e) {
-                              // Keep original if parsing fails
+                              formattedDate = couponValidity;
                             }
 
                             // Determine icon based on coupon title
@@ -806,25 +859,15 @@ class _VendorSettingsState extends State<VendorSettings> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            couponIcon,
-                                            size: 20,
-                                            color: AppConstants.primaryColor,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            couponTitle,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppConstants.textColor,
-                                              fontFamily:
-                                                  AppConstants.fontFamilyNunito,
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        'Coupon',
+                                        style: TextStyle(
+                                          color: AppConstants.primaryColor,
+                                          fontFamily:
+                                              AppConstants.fontFamilyRaleway,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
                                       Text(
                                         'Valid Until $formattedDate',
@@ -832,6 +875,36 @@ class _VendorSettingsState extends State<VendorSettings> {
                                           fontSize: 12,
                                           color: AppConstants.textColor
                                               .withAlpha(150),
+                                          fontFamily:
+                                              AppConstants.fontFamilyNunito,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+
+                                  DottedDashedLine(
+                                    dashColor: AppConstants.primaryColor,
+                                    height: 5,
+                                    width: double.infinity,
+                                    axis: Axis.horizontal,
+                                  ),
+                                  SizedBox(height: 18),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        couponIcon,
+                                        size: 20,
+                                        color: AppConstants.primaryColor,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        overflow: TextOverflow.ellipsis,
+                                        couponTitle,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppConstants.textColor,
                                           fontFamily:
                                               AppConstants.fontFamilyNunito,
                                         ),
@@ -894,10 +967,1112 @@ class _VendorSettingsState extends State<VendorSettings> {
     );
   }
 
-  void showPaymentMethods() {}
-  void showNotifications() {}
-  void showFAQ() {}
-  void showTerms() {}
-  void showPrivacy() {}
-  void showAbout() {}
+  Future<void> showPaymentMethods() async {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 40,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Container(
+                padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+                decoration: BoxDecoration(
+                  color: AppConstants.backgroundColor,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                          color: AppConstants.textColor,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Settings',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Payment Methods',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppConstants.textColor,
+                              fontFamily: AppConstants.fontFamilyNunito,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Manage your saved cards and mobile money accounts.',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: AppConstants.textColor.withAlpha(150),
+                              fontFamily: AppConstants.fontFamilyNunito,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    ...paymentCards.map(
+                      (card) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _buildPaymentCardTile(
+                          card: card,
+                          onEdit: () async {
+                            final updatedCard = await _showCardForm(
+                              existing: card,
+                            );
+                            if (updatedCard != null) {
+                              setState(() {
+                                final index = paymentCards.indexOf(card);
+                                paymentCards[index] = updatedCard;
+                              });
+                              this.setState(() {});
+                              await _showPaymentSuccess(
+                                'Your card has been updated successfully',
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    _buildAddButton(
+                      title: 'Add Card',
+                      icon: Icons.add,
+                      onTap: () async {
+                        final newCard = await _showCardForm();
+                        if (newCard != null) {
+                          setState(() {
+                            paymentCards.add(newCard);
+                          });
+                          this.setState(() {});
+                          await _showPaymentSuccess(
+                            'Your card has been added successfully',
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    Text(
+                      'Mobile Money',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppConstants.textColor,
+                        fontFamily: AppConstants.fontFamilyNunito,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ...mobileMoneyAccounts.map(
+                      (account) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _buildMobileMoneyTile(
+                          account: account,
+                          actionLabel: 'Edit',
+                          onAction: () async {
+                            final updatedAccount = await _showMobileMoneyForm(
+                              existing: account,
+                            );
+                            if (updatedAccount != null) {
+                              setState(() {
+                                final index = mobileMoneyAccounts.indexOf(
+                                  account,
+                                );
+                                mobileMoneyAccounts[index] = updatedAccount;
+                              });
+                              this.setState(() {});
+                              await _showPaymentSuccess(
+                                'Your Momo has been updated successfully',
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    _buildMobileMoneyTile(
+                      account: {
+                        'provider': 'Mobile Money',
+                        'accountName': 'Add new account',
+                        'accountNumber': '',
+                      },
+                      actionLabel: 'Link',
+                      onAction: () async {
+                        final newAccount = await _showMobileMoneyForm();
+                        if (newAccount != null) {
+                          setState(() {
+                            mobileMoneyAccounts.add(newAccount);
+                          });
+                          this.setState(() {});
+                          await _showPaymentSuccess(
+                            'Your Momo has been linked successfully',
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPaymentCardTile({
+    required Map<String, String> card,
+    required VoidCallback onEdit,
+  }) {
+    final holder = card['cardHolder'] ?? 'Card Holder';
+    final expiry = card['expiry'] ?? '';
+    final masked = _maskCardNumber(card['cardNumber'] ?? '');
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF2E77F5), Color(0xFF2461E0)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 60,
+                height: 32,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      left: 0,
+                      child: _buildMasterCardCircle(
+                        color: const Color(0xFFFFA94A),
+                      ),
+                    ),
+                    Positioned(
+                      left: 18,
+                      child: _buildMasterCardCircle(
+                        color: const Color(0xFFFF5F6D),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      card['brand'] ?? 'Card',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      holder,
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.8),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 38,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    4,
+                    (index) => Container(
+                      width: 6,
+                      height: 6,
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Text(
+            masked,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              letterSpacing: 2,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    holder.toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 13,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'CARD HOLDER',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                      fontSize: 11,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    expiry,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'VALID THRU',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                      fontSize: 11,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: onEdit,
+                icon: const Icon(Icons.edit_outlined, color: Colors.white),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMasterCardCircle({required Color color}) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    );
+  }
+
+  Widget _buildAddButton({
+    required String title,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return OutlinedButton.icon(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        side: BorderSide(color: AppConstants.borderColor),
+      ),
+      icon: Icon(icon, color: AppConstants.primaryColor),
+      label: Text(
+        title,
+        style: TextStyle(
+          color: AppConstants.textColor,
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          fontFamily: AppConstants.fontFamilyNunito,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMobileMoneyTile({
+    required Map<String, String> account,
+    required String actionLabel,
+    required VoidCallback onAction,
+  }) {
+    final name = account['accountName'] ?? '';
+    final number = account['accountNumber'] ?? '';
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppConstants.borderColor, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              color: AppConstants.primaryColor.withOpacity(0.08),
+            ),
+            child: Icon(
+              Icons.account_balance_wallet_outlined,
+              color: AppConstants.primaryColor,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  account['provider'] ?? 'Mobile Money',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: AppConstants.textColor,
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppConstants.textColor.withAlpha(160),
+                  ),
+                ),
+                if (number.isNotEmpty) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    _maskMobileNumber(number),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppConstants.textColor.withAlpha(150),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: onAction,
+            style: TextButton.styleFrom(
+              foregroundColor: AppConstants.primaryColor,
+              textStyle: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+            child: Text(actionLabel),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<Map<String, String>?> _showCardForm({
+    Map<String, String>? existing,
+  }) async {
+    final cardNumberController = TextEditingController(
+      text: existing?['cardNumber'] ?? '',
+    );
+    final holderController = TextEditingController(
+      text: existing?['cardHolder'] ?? '',
+    );
+    final expiryController = TextEditingController(
+      text: existing?['expiry'] ?? '',
+    );
+    final cvvController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+
+    return showModalBottomSheet<Map<String, String>>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+            top: 24,
+          ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppConstants.borderColor,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  existing == null ? 'Add Card' : 'Edit Card',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.textColor,
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                CustomFormField(
+                  labelText: 'Card Holder',
+                  hintText: 'Jennifer Johnson',
+                  controller: holderController,
+                  validator:
+                      (value) =>
+                          value == null || value.isEmpty ? 'Required' : null,
+                ),
+                const SizedBox(height: 16),
+                CustomFormField(
+                  labelText: 'Card Number',
+                  hintText: '1234 5678 9012 3456',
+                  keyboardType: TextInputType.number,
+                  controller: cardNumberController,
+                  validator:
+                      (value) =>
+                          value == null || value.length < 8
+                              ? 'Invalid number'
+                              : null,
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomFormField(
+                        labelText: 'Date',
+                        hintText: 'MM/YY',
+                        controller: expiryController,
+                        validator:
+                            (value) =>
+                                value == null || value.isEmpty
+                                    ? 'Required'
+                                    : null,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomFormField(
+                        labelText: 'CVV',
+                        hintText: '123',
+                        isPassword: true,
+                        controller: cvvController,
+                        validator:
+                            (value) =>
+                                value == null || value.length < 3
+                                    ? 'Invalid'
+                                    : null,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: CustomButtonWidget(
+                    buttonTitle: 'Save Changes',
+                    isDisabled: false,
+                    onPressed: () {
+                      if (formKey.currentState?.validate() ?? false) {
+                        Navigator.of(context).pop({
+                          'brand': 'Mastercard',
+                          'cardHolder': holderController.text.trim(),
+                          'cardNumber': cardNumberController.text.trim(),
+                          'expiry': expiryController.text.trim(),
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<Map<String, String>?> _showMobileMoneyForm({
+    Map<String, String>? existing,
+  }) async {
+    final nameController = TextEditingController(
+      text: existing?['accountName'] ?? '',
+    );
+    final numberController = TextEditingController(
+      text: existing?['accountNumber'] ?? '',
+    );
+    final formKey = GlobalKey<FormState>();
+
+    return showModalBottomSheet<Map<String, String>>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+            top: 24,
+          ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppConstants.borderColor,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  existing == null
+                      ? 'Add Mobile Money Account'
+                      : 'Edit Mobile Money Account',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.textColor,
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                CustomFormField(
+                  labelText: 'Account Name',
+                  hintText: 'Jennifer Johnson',
+                  controller: nameController,
+                  validator:
+                      (value) =>
+                          value == null || value.isEmpty ? 'Required' : null,
+                ),
+                const SizedBox(height: 16),
+                CustomFormField(
+                  labelText: 'Mobile Money Number',
+                  hintText: '024 123 1234',
+                  controller: numberController,
+                  keyboardType: TextInputType.phone,
+                  validator:
+                      (value) =>
+                          value == null || value.length < 8
+                              ? 'Invalid number'
+                              : null,
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: CustomButtonWidget(
+                    buttonTitle: existing == null ? 'Link' : 'Save Changes',
+                    isDisabled: false,
+                    onPressed: () {
+                      if (formKey.currentState?.validate() ?? false) {
+                        Navigator.of(context).pop({
+                          'provider': 'Mobile Money',
+                          'accountName': nameController.text.trim(),
+                          'accountNumber': numberController.text.trim(),
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _showPaymentSuccess(String message) async {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
+            decoration: BoxDecoration(
+              color: AppConstants.backgroundColor,
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: AppConstants.primaryColor.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.check,
+                    color: AppConstants.primaryColor,
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Done!',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.textColor,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppConstants.textColor.withAlpha(150),
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(
+                    'Close',
+                    style: TextStyle(
+                      color: AppConstants.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  String _maskCardNumber(String number) {
+    if (number.length <= 4) return number;
+    final last4 = number.substring(number.length - 4);
+    return '**** **** **** $last4';
+  }
+
+  String _maskMobileNumber(String number) {
+    if (number.length <= 4) return number;
+    final last4 = number.substring(number.length - 4);
+    return '${'*' * (number.length - 4)}$last4';
+  }
+
+  Future<dynamic> showNotifications() async {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 40,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Container(
+                padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+                decoration: BoxDecoration(
+                  color: AppConstants.backgroundColor,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                          color: AppConstants.textColor,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Notification Settings',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        'Choose what updates you would like to receive.',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppConstants.textColor.withAlpha(150),
+                          fontFamily: AppConstants.fontFamilyNunito,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    _buildNotificationItem(
+                      title: 'Order Updates',
+                      subtitle: 'Track confirmations, shipping and delivery.',
+                      value: acceptOrderUpdates,
+                      onChanged: (value) {
+                        setState(() => acceptOrderUpdates = value);
+                      },
+                    ),
+                    _buildNotificationItem(
+                      title: 'Promotions',
+                      subtitle: 'Stay informed about special discounts.',
+                      value: acceptPromotions,
+                      onChanged: (value) {
+                        setState(() => acceptPromotions = value);
+                      },
+                    ),
+                    _buildNotificationItem(
+                      title: 'New Product Alerts',
+                      subtitle: 'Know when new arrivals hit the store.',
+                      value: acceptNewProductAlerts,
+                      onChanged: (value) {
+                        setState(() => acceptNewProductAlerts = value);
+                      },
+                    ),
+                    _buildNotificationItem(
+                      title: 'Wallet Activities',
+                      subtitle: 'Receive wallet credit and debit notices.',
+                      value: acceptWalletActivities,
+                      onChanged: (value) {
+                        setState(() => acceptWalletActivities = value);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildNotificationItem({
+    required String title,
+    required String subtitle,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppConstants.borderColor, width: 1),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppConstants.textColor,
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppConstants.textColor.withAlpha(160),
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Switch.adaptive(
+            value: value,
+            activeColor: AppConstants.primaryColor,
+            inactiveTrackColor: AppConstants.borderColor,
+            onChanged: onChanged,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> showTerms() async {
+    return _buildInfoDialog(
+      title: 'Terms and Conditions',
+      description:
+          'If you need help or have any questions, feel free to contact us by email.',
+      bodyText: terms,
+    );
+  }
+
+  Future<void> showPrivacy() async {
+    return _buildInfoDialog(
+      title: 'Privacy Policy',
+      description:
+          'If you need help or have any questions, feel free to contact us by email.',
+      bodyText:
+          'We respect your privacy and only use your information to improve your shopping experience. $terms',
+    );
+  }
+
+  Future<void> showAbout() {
+    return _buildInfoDialog(
+      title: 'About Bexiemart',
+      description: 'A good shopping platform',
+      customContent: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              AppConstants.appLogo,
+              width: 80,
+              height: 80,
+              fit: BoxFit.contain,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'About Bexiemart',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppConstants.textColor,
+              fontFamily: AppConstants.fontFamilyNunito,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'A good shopping platform',
+            style: TextStyle(
+              fontSize: 14,
+              color: AppConstants.textColor.withAlpha(150),
+              fontFamily: AppConstants.fontFamilyNunito,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'If you need help or have any questions, feel free to contact us by email.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              color: AppConstants.textColor.withAlpha(150),
+              fontFamily: AppConstants.fontFamilyNunito,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'hello@mydomain.com',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: AppConstants.primaryColor,
+              fontFamily: AppConstants.fontFamilyNunito,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _buildInfoDialog({
+    required String title,
+    required String description,
+    String? bodyText,
+    Widget? customContent,
+  }) {
+    return showAdaptiveDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 40,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+            decoration: BoxDecoration(
+              color: AppConstants.backgroundColor,
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                      color: AppConstants.textColor,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Settings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: AppConstants.textColor,
+                        fontFamily: AppConstants.fontFamilyNunito,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: AppConstants.textColor,
+                          fontFamily: AppConstants.fontFamilyNunito,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppConstants.textColor.withAlpha(150),
+                          fontFamily: AppConstants.fontFamilyNunito,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                if (customContent != null)
+                  customContent
+                else
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      bodyText ?? '',
+                      style: TextStyle(
+                        fontSize: 14,
+                        height: 1.6,
+                        color: AppConstants.textColor.withAlpha(200),
+                        fontFamily: AppConstants.fontFamilyNunito,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 24),
+                Center(
+                  child: Text(
+                    'hello@mydomain.com',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: AppConstants.primaryColor,
+                      fontFamily: AppConstants.fontFamilyNunito,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
