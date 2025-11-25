@@ -26,6 +26,13 @@ class _VendorEarningsState extends State<VendorEarnings> {
   double pendingBalance = 300.0;
 
   double availableBalance = 950.0;
+
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

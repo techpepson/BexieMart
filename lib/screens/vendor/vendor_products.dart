@@ -383,6 +383,7 @@ class _VendorProductsState extends State<VendorProducts> {
 
   @override
   void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
     searchController.dispose();
     super.dispose();
   }

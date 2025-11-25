@@ -12,6 +12,12 @@ class VendorOrderDetails extends StatefulWidget {
 }
 
 class _VendorOrderDetailsState extends State<VendorOrderDetails> {
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
+  }
+
   String ownerCurrency = 'dollars';
   @override
   Widget build(BuildContext context) {

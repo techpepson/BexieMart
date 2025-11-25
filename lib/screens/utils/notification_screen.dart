@@ -89,56 +89,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
     );
   }
-
-  Widget _buildMockBottomNav() {
-    final labels = ['Dashboard', 'Products', 'Orders', 'Earnings', 'Profile'];
-    return Container(
-      height: 68,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 16,
-            offset: const Offset(0, -4),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:
-            labels.map((label) {
-              final isActive = label == 'Dashboard';
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.circle,
-                    size: 20,
-                    color:
-                        isActive
-                            ? AppConstants.primaryColor
-                            : AppConstants.textColor.withAlpha(120),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color:
-                          isActive
-                              ? AppConstants.primaryColor
-                              : AppConstants.textColor.withAlpha(150),
-                      fontFamily: AppConstants.fontFamilyNunito,
-                    ),
-                  ),
-                ],
-              );
-            }).toList(),
-      ),
-    );
-  }
 }
 
 class _NotificationTile extends StatelessWidget {

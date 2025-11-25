@@ -20,6 +20,7 @@ class _AddCouponState extends State<AddCoupon> {
 
   @override
   void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
     validUntilController.dispose();
     super.dispose();
   }

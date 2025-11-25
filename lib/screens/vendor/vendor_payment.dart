@@ -420,6 +420,7 @@ class _VendorPaymentState extends State<VendorPayment> {
 
   @override
   void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
     amountController.dispose();
     phoneController.dispose();
     super.dispose();

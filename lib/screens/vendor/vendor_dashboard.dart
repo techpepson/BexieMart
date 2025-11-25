@@ -20,6 +20,12 @@ class _VendorDashboardState extends State<VendorDashboard> {
 
   int ownerEarnings = 3250;
 
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
+  }
+
   AppServices appServices = AppServices();
   @override
   Widget build(BuildContext context) {
@@ -174,7 +180,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                 {
                   'icon': Icons.local_offer_outlined,
                   'title': 'Create Coupon',
-                  'location': '',
+                  'location': '/vendor-settings/add-coupon',
                 },
                 {
                   'icon': Icons.trending_up_outlined,
@@ -184,7 +190,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                 {
                   'icon': Icons.account_balance_outlined,
                   'title': 'Withdraw',
-                  'location': '',
+                  'location': '/vendor-earnings/payment-screen',
                 },
               ];
               return _buildQuickActionItem(

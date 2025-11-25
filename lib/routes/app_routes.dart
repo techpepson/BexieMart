@@ -49,6 +49,7 @@ final GoRouter appRouter = GoRouter(
         );
       },
     ),
+
     GoRoute(
       path: '/vendor-add-products',
       pageBuilder: (context, state) {

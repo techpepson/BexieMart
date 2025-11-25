@@ -25,6 +25,8 @@ class _VendorSettingsState extends State<VendorSettings> {
   File? _selectedProfileImage;
   final ImagePicker _imagePicker = ImagePicker();
 
+  File? _selectedStoreLogo;
+
   String terms =
       'This is Bexiemart, an e-commerce app that is here to make your online shopping very easy and affordable';
 
@@ -33,6 +35,7 @@ class _VendorSettingsState extends State<VendorSettings> {
   bool acceptPromotions = true;
   bool acceptNewProductAlerts = true;
   bool acceptWalletActivities = true;
+  List<Map<String, dynamic>> _coupons = [];
   List<Map<String, String>> paymentCards = [
     {
       'brand': 'Mastercard',
@@ -48,6 +51,53 @@ class _VendorSettingsState extends State<VendorSettings> {
       'accountNumber': '02412341244',
     },
   ];
+
+  Future<dynamic> pickStoreLogo(
+    StateSetter setState,
+    ImageSource source,
+  ) async {
+    try {
+      final pickedImage = await _imagePicker.pickImage(
+        source: source,
+        imageQuality: 80,
+        maxHeight: 500,
+        maxWidth: 500,
+      );
+
+      if (pickedImage != null) {
+        setState(() {
+          _selectedStoreLogo = File(pickedImage.path);
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        return ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: AppConstants.errorColor,
+            content: Text(
+              'Image Selection Failed',
+              style: TextStyle(color: AppConstants.backgroundColor),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _coupons =
+        vendorData.coupons
+            .map((coupon) => Map<String, dynamic>.from(coupon))
+            .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,13 +223,6 @@ class _VendorSettingsState extends State<VendorSettings> {
     );
   }
 
-  Widget _buildLogout() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Center(child: Text('Logout')),
-    );
-  }
-
   Future<void> _pickProfileImage(
     ImageSource source,
     StateSetter setState,
@@ -265,6 +308,73 @@ class _VendorSettingsState extends State<VendorSettings> {
                   onTap: () async {
                     Navigator.of(sheetContext).pop();
                     await _pickProfileImage(ImageSource.camera, setState);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _showShopImageSourceModal(
+    BuildContext context,
+    StateSetter setState,
+  ) async {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: AppConstants.backgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppConstants.borderColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Select Image Source',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.textColor,
+                    fontFamily: AppConstants.fontFamilyNunito,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                _buildSourceSheetTile(
+                  icon: Icons.photo_library_outlined,
+                  title: 'Gallery',
+                  subtitle: 'Choose from your photo gallery',
+                  onTap: () async {
+                    Navigator.of(sheetContext).pop();
+                    await pickStoreLogo(setState, ImageSource.gallery);
+                  },
+                ),
+                const SizedBox(height: 12),
+                _buildSourceSheetTile(
+                  icon: Icons.photo_camera_outlined,
+                  title: 'Camera',
+                  subtitle: 'Capture a new photo instantly',
+                  onTap: () async {
+                    Navigator.of(sheetContext).pop();
+                    await pickStoreLogo(setState, ImageSource.camera);
                   },
                 ),
               ],
@@ -595,33 +705,54 @@ class _VendorSettingsState extends State<VendorSettings> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      DottedBorder(
-                        options: RectDottedBorderOptions(),
-                        child: Container(
-                          width: 73,
-                          height: 73,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.cloud_upload_outlined,
-                                size: 40,
-                                color: AppConstants.textColor.withAlpha(150),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Upload Logo',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: AppConstants.textColor.withAlpha(150),
+                      InkWell(
+                        onTap: () async {
+                          return await _showShopImageSourceModal(
+                            context,
+                            setState,
+                          );
+                        },
+                        child:
+                            _selectedStoreLogo == null
+                                ? DottedBorder(
+                                  options: RectDottedBorderOptions(),
+                                  child: Container(
+                                    width: 73,
+                                    height: 73,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.cloud_upload_outlined,
+                                          size: 40,
+                                          color: AppConstants.textColor
+                                              .withAlpha(150),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          'Upload Logo',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppConstants.textColor
+                                                .withAlpha(150),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                : ClipOval(
+                                  child: Image.file(
+                                    _selectedStoreLogo!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                       const SizedBox(height: 24),
                       CustomFormField(
@@ -738,7 +869,7 @@ class _VendorSettingsState extends State<VendorSettings> {
   }
 
   Future<dynamic> showCoupons() async {
-    List<Map<String, dynamic>> coupons = vendorData.coupons;
+    final coupons = _coupons;
     return showAdaptiveDialog(
       context: context,
       builder: (context) {
@@ -939,7 +1070,24 @@ class _VendorSettingsState extends State<VendorSettings> {
                                       ),
                                       const SizedBox(width: 8),
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          final updatedCoupon =
+                                              await _openCouponEditor(
+                                                coupon: coupon,
+                                              );
+                                          if (updatedCoupon != null) {
+                                            setState(() {
+                                              _coupons[index] =
+                                                  Map<String, dynamic>.from(
+                                                    updatedCoupon,
+                                                  );
+                                              vendorData.coupons = List<
+                                                Map<String, dynamic>
+                                              >.from(_coupons);
+                                            });
+                                            this.setState(() {});
+                                          }
+                                        },
                                         child: Text(
                                           'Edit',
                                           style: TextStyle(
@@ -964,6 +1112,17 @@ class _VendorSettingsState extends State<VendorSettings> {
           ),
         );
       },
+    );
+  }
+
+  Future<Map<String, dynamic>?> _openCouponEditor({
+    Map<String, dynamic>? coupon,
+  }) async {
+    return Navigator.of(context).push<Map<String, dynamic>>(
+      MaterialPageRoute(
+        builder: (_) => CouponEditorScreen(initialCoupon: coupon),
+        fullscreenDialog: true,
+      ),
     );
   }
 
@@ -1065,6 +1224,7 @@ class _VendorSettingsState extends State<VendorSettings> {
                       icon: Icons.add,
                       onTap: () async {
                         final newCard = await _showCardForm();
+
                         if (newCard != null) {
                           setState(() {
                             paymentCards.add(newCard);
@@ -2074,5 +2234,288 @@ class _VendorSettingsState extends State<VendorSettings> {
         );
       },
     );
+  }
+}
+
+class CouponEditorScreen extends StatefulWidget {
+  const CouponEditorScreen({super.key, this.initialCoupon});
+
+  final Map<String, dynamic>? initialCoupon;
+
+  @override
+  State<CouponEditorScreen> createState() => _CouponEditorScreenState();
+}
+
+class _CouponEditorScreenState extends State<CouponEditorScreen> {
+  late TextEditingController _titleController;
+  late TextEditingController _codeController;
+  late TextEditingController _validUntilController;
+  late TextEditingController _usageLimitController;
+  late TextEditingController _descriptionController;
+  String _selectedType = 'percentage';
+  bool _firstPurchaseOnly = false;
+  late double _couponValue;
+  final _formKey = GlobalKey<FormState>();
+  final List<String> _couponTypes = ['percentage', 'amount'];
+
+  @override
+  void initState() {
+    super.initState();
+    final data = widget.initialCoupon ?? {};
+    _selectedType = (data['couponType'] ?? 'percentage').toString();
+    _couponValue =
+        (data['couponValue'] is num)
+            ? (data['couponValue'] as num).toDouble()
+            : 0;
+    _firstPurchaseOnly = data['firstPurchaseOnly'] == true;
+    _titleController = TextEditingController(text: data['couponTitle'] ?? '');
+    _codeController = TextEditingController(text: data['couponCode'] ?? '');
+    _validUntilController = TextEditingController(
+      text: data['validPeriod'] ?? '',
+    );
+    _usageLimitController = TextEditingController(
+      text: (data['usageLimit'] ?? '5').toString(),
+    );
+    _descriptionController = TextEditingController(
+      text: _buildDescriptionSeed(
+        _couponValue,
+        _selectedType,
+        data['couponDescription'] ?? '',
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _codeController.dispose();
+    _validUntilController.dispose();
+    _usageLimitController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppConstants.backgroundColor,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppConstants.backgroundColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          color: AppConstants.textColor,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          widget.initialCoupon == null ? 'Create Coupon' : 'Edit Coupon',
+          style: TextStyle(
+            color: AppConstants.textColor,
+            fontFamily: AppConstants.fontFamilyNunito,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 24),
+                CustomFormField(
+                  labelText: 'Coupon Title',
+                  hintText: 'First Purchase',
+                  controller: _titleController,
+                  validator:
+                      (value) =>
+                          value == null || value.isEmpty ? 'Required' : null,
+                ),
+                const SizedBox(height: 16),
+                CustomFormField(
+                  labelText: 'Coupon Code',
+                  hintText: 'FIRST5',
+                  controller: _codeController,
+                  validator:
+                      (value) =>
+                          value == null || value.isEmpty ? 'Required' : null,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: AppConstants.borderColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: AppConstants.borderColor),
+                    ),
+                  ),
+                  value: _selectedType,
+                  items:
+                      _couponTypes
+                          .map(
+                            (type) => DropdownMenuItem(
+                              value: type,
+                              child: Text(
+                                type[0].toUpperCase() + type.substring(1),
+                                style: TextStyle(
+                                  fontFamily: AppConstants.fontFamilyNunito,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() {
+                      _selectedType = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomFormField(
+                        labelText: 'Valid Until',
+                        hintText: '5.16.20',
+                        controller: _validUntilController,
+                        keyboardType: TextInputType.datetime,
+                        validator:
+                            (value) =>
+                                value == null || value.isEmpty
+                                    ? 'Required'
+                                    : null,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomFormField(
+                        labelText: 'Usage Limit',
+                        hintText: '5',
+                        controller: _usageLimitController,
+                        keyboardType: TextInputType.number,
+                        validator:
+                            (value) =>
+                                value == null || value.isEmpty
+                                    ? 'Required'
+                                    : null,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                CustomFormField(
+                  labelText: 'Discount Summary',
+                  hintText: '5% off of your next order',
+                  controller: _descriptionController,
+                  maxLines: 2,
+                  validator:
+                      (value) =>
+                          value == null || value.isEmpty ? 'Required' : null,
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'First Purchase Only',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppConstants.textColor,
+                            fontFamily: AppConstants.fontFamilyNunito,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Limit to first time customers',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppConstants.textColor.withAlpha(150),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Switch.adaptive(
+                      value: _firstPurchaseOnly,
+                      activeColor: AppConstants.primaryColor,
+                      onChanged: (value) {
+                        setState(() {
+                          _firstPurchaseOnly = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: CustomButtonWidget(
+                    buttonTitle: 'Save Changes',
+                    isDisabled: false,
+                    onPressed: _handleSave,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _handleSave() {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    final usageLimit = int.tryParse(_usageLimitController.text.trim()) ?? 0;
+    final combined = _descriptionController.text.trim();
+    final parsedValue = _extractValueFromSummary(combined) ?? _couponValue;
+    final summaryText = _extractSummaryText(combined);
+
+    Navigator.of(context).pop({
+      'couponTitle': _titleController.text.trim(),
+      'couponCode': _codeController.text.trim(),
+      'couponType': _selectedType,
+      'couponValue': parsedValue,
+      'validPeriod': _validUntilController.text.trim(),
+      'usageLimit': usageLimit,
+      'couponDescription': summaryText,
+      'firstPurchaseOnly': _firstPurchaseOnly,
+    });
+  }
+
+  String _buildDescriptionSeed(double value, String type, String description) {
+    if (value == 0) {
+      return description;
+    }
+    final formattedValue =
+        value % 1 == 0 ? value.toInt().toString() : value.toString();
+    final symbol = type == 'percentage' ? '%' : '';
+    final trimmedDesc = description.trim();
+    return '$formattedValue$symbol'
+        '${trimmedDesc.isNotEmpty ? ' $trimmedDesc' : ''}';
+  }
+
+  double? _extractValueFromSummary(String text) {
+    final match = RegExp(r'\d+(\.\d+)?').firstMatch(text);
+    if (match == null) return null;
+    return double.tryParse(match.group(0)!);
+  }
+
+  String _extractSummaryText(String text) {
+    final match = RegExp(r'\d+(\.\d+)?\s*%?').firstMatch(text);
+    if (match == null) {
+      return text;
+    }
+    return text.substring(match.end).trim();
   }
 }

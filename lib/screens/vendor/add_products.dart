@@ -88,6 +88,12 @@ class _AddProductsState extends State<AddProducts> {
   }
 
   @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
