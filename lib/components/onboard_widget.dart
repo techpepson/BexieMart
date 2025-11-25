@@ -22,7 +22,7 @@ class OnboardWidget extends StatefulWidget {
 }
 
 class _OnboardWidgetState extends State<OnboardWidget> {
-  String userType = 'vendor';
+  String userType = 'customer';
   @override
   Widget build(BuildContext context) {
     return Padding(
