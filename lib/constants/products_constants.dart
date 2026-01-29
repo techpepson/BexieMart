@@ -18,9 +18,12 @@ enum FoodCategories {
   LUNCH,
   DINNER,
   SNACKS,
+
   DESSERTS,
   DRINKS,
   FAST_FOOD,
   LOCAL,
   OTHERS,
 }
+
+
